@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="jasp">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>{{title}}</title>
+  <link rel="stylesheet" type="text/css" href="resources/bower_components/angular-hotkeys/build/hotkeys.min.css">
+  <link rel="stylesheet" type="text/css" href="resources/css/reset.css">
+  <link rel="stylesheet" type="text/css" href="resources/css/taskplanner.css">
+
+  <script type="text/javascript" src="resources/bower_components/angular/angular.js"></script>
+  <script type="text/javascript" src="resources/bower_components/ui-router/angular-ui-router.min.js"></script>
+
+  <script type="text/javascript" src="resources/bower_components/angular-translate/angular-translate.js"></script>
+  <script type="text/javascript" src="resources/bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.min.js"></script>
+  <script type="text/javascript" src="resources/bower_components/angular-translate-storage-cookie/angular-translate-storage-cookie.min.js"></script>
+  <script type="text/javascript" src="resources/bower_components/angular-translate-storage-local/angular-translate-storage-local.min.js"></script>
+  <script type="text/javascript" src="resources/bower_components/angular-hotkeys/build/hotkeys.min.js"></script>
+  <script type="text/javascript" src="resources/bower_components/angular-growl-notifications/dist/angular-growl-notifications.min.js"></script>
+
+  <script type="text/javascript" src="resources/js/taskplanner.js"></script>
+
+  <script type="text/javascript" src="resources/bower_components/moment/moment.js"></script>
+  <script type="text/javascript" src="resources/bower_components/moment/locale/de.js"></script>
+  <script type="text/javascript" src="resources/bower_components/moment/locale/en-gb.js"></script>
+</head>
+
+<body>
+  <section id="content-container" class="wrapper">
+    <growl-notifications> </growl-notifications>
+    <div ng-repeat="(id, notification) in notifications track by id">
+      <growl-notification ng-class="notification.type"> {{notification.text}} </growl-notification>
+    </div>
+    <ui-view></ui-view>
+  </section>
+</body>
+
+</html>

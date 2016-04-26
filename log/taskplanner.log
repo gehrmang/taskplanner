@@ -1,0 +1,13 @@
+{"level":"info","message":"   Taskplanner listening at http://:::8080","timestamp":"2016-04-26T17:22:54.788Z"}
+{"message":"  ","name":"MongoError","stack":"Error: getaddrinfo ENOTFOUND ds021771.mongolab.com ds021771.mongolab.com:21771\n    at errnoException (dns.js:26:10)\n    at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:77:26)","level":"error","timestamp":"2016-04-26T17:22:54.844Z"}
+{"level":"error","message":"  Could not connect to MongoDB!","timestamp":"2016-04-26T17:22:54.847Z"}
+{"level":"info","message":"   Connected to MongoDB","timestamp":"2016-04-26T17:22:54.848Z"}
+{"level":"info","message":"   Taskplanner listening at http://:::8080","timestamp":"2016-04-26T17:24:12.509Z"}
+{"message":"  ","name":"MongoError","stack":"Error: getaddrinfo ENOTFOUND ds021771.mongolab.com ds021771.mongolab.com:21771\n    at errnoException (dns.js:26:10)\n    at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:77:26)","level":"error","timestamp":"2016-04-26T17:24:12.558Z"}
+{"level":"error","message":"  Could not connect to MongoDB!","timestamp":"2016-04-26T17:24:12.560Z"}
+{"level":"info","message":"   Taskplanner listening at http://:::8080","timestamp":"2016-04-26T17:24:50.558Z"}
+{"message":"  ","name":"MongoError","stack":"Error: getaddrinfo ENOTFOUND ds021771.mongolab.com ds021771.mongolab.com:21771\n    at errnoException (dns.js:26:10)\n    at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:77:26)","level":"error","timestamp":"2016-04-26T17:24:50.598Z"}
+{"level":"info","message":"   Taskplanner listening at http://:::8080","timestamp":"2016-04-26T17:27:10.440Z"}
+{"level":"info","message":"   Connected to MongoDB","timestamp":"2016-04-26T17:27:11.247Z"}
+{"level":"info","message":"   Taskplanner listening at http://:::8080","timestamp":"2016-04-26T17:27:29.782Z"}
+{"level":"info","message":"   Connected to MongoDB","timestamp":"2016-04-26T17:27:31.007Z"}
