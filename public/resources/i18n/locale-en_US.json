@@ -1,0 +1,14 @@
+{
+    "NAVIGATION": {
+        "HOME": "Home",
+        "LOGIN": "Login",
+        "LOGIN_MESSAGE": "Welcome to Taskplanner. Please enter your username and password to log-in.",
+        "LOGOUT": "Logout",
+        "PASSWORD": "Password",
+        "PROFILE": "Profile",
+        "USERNAME": "Username"
+    },
+    "GLOBAL": {
+        "TITLE": "Taskplanner"
+    }
+}

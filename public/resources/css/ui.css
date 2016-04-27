@@ -1,0 +1,755 @@
+/******************************/
+
+
+/*********** Fonts ************/
+
+
+/******************************/
+
+@font-face {
+	font-family: 'lato_regular';
+	src: url('../fonts/lato-regular.woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'lato_bold';
+	src: url('../fonts/lato-bold.woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'avantgardelt-extralight';
+	src: url('../fonts/avantgardelt-extralight.woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'felipa';
+	src: url('../fonts/Felipa-Regular.otf');
+	font-weight: normal;
+	font-style: normal;
+}
+
+
+/******************************/
+
+
+/****** General settings ******/
+
+
+/******************************/
+
+* {
+	-webkit-box-sizing: border-box;
+	/* Safari/Chrome, other WebKit */
+	-moz-box-sizing: border-box;
+	/* Firefox, other Gecko */
+	box-sizing: border-box;
+	/* Opera/IE 8+ */
+	font-size: 12px;
+	color: #353434;
+	outline: 0;
+}
+
+.clearfix:before,
+.clearfix:after {
+	content: "";
+	display: table;
+}
+
+.clearfix:after {
+	clear: both;
+}
+
+.clearfix {
+	zoom: 1;
+	/* For IE 6/7 (trigger hasLayout) */
+}
+
+.floatleft {
+	float: left;
+}
+
+.floatright {
+	float: right;
+}
+
+.position-fixed {
+	position: fixed;
+}
+
+.title {
+	font-size: 14px;
+	font-weight: bold;
+}
+
+
+/******************************/
+
+
+/******** Column Grid *********/
+
+
+/******************************/
+
+.fullwidth {
+	width: 100%;
+	padding: 1em;
+}
+
+.col10 {
+	width: 10%;
+	float: left;
+	padding: 1em;
+}
+
+.col20 {
+	width: 20%;
+	float: left;
+	padding: 1em;
+}
+
+.col25 {
+	width: 25%;
+	float: left;
+	padding: 1em;
+}
+
+.col30 {
+	width: 30%;
+	float: left;
+	padding: 1em;
+}
+
+.col33 {
+	width: 33.33%;
+	float: left;
+	padding: 1em;
+}
+
+.col40 {
+	width: 40%;
+	float: left;
+	padding: 1em;
+}
+
+.col50 {
+	width: 50%;
+	float: left;
+	padding: 1em;
+}
+
+.col60 {
+	width: 60%;
+	float: left;
+	padding: 1em;
+}
+
+.col70 {
+	width: 70%;
+	float: left;
+	padding: 1em;
+}
+
+.col75 {
+	width: 75%;
+	float: left;
+	padding: 1em;
+}
+
+.col80 {
+	width: 80%;
+	float: left;
+	padding: 1em;
+}
+
+.col90 {
+	width: 90%;
+	float: left;
+	padding: 1em;
+}
+
+
+/******************************/
+
+
+/****** Framed containers *****/
+
+
+/******************************/
+
+.framed-container {
+	background: #F0F0F0;
+	padding: 1em;
+	border-radius: 5px;
+	border-top: 5px solid #1d61a6;
+	overflow: hidden;
+	position: relative;
+}
+
+
+/******************************/
+
+
+/******** Header glyphs *******/
+
+
+/******************************/
+
+.header-glyph {
+	width: 30px;
+	height: 30px;
+	border: 1px solid #1d61a6;
+	color: #1d61a6;
+	border-radius: 15px;
+	text-align: center;
+	padding: 2px 0;
+	margin: 0 auto;
+	display: block;
+}
+
+.header-glyph span {
+	letter-spacing: normal;
+	display: inline-block;
+	width: 100%;
+}
+
+.header-glyph img {
+	width: 20px;
+	height: 20px;
+}
+
+
+/******************************/
+
+
+/*********** Dialog ***********/
+
+
+/******************************/
+
+.modalDialog {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: rgba(0, 0, 0, 0.5);
+	z-index: 9998;
+	opacity: 0;
+	-webkit-transition: opacity 400ms ease-in;
+	-moz-transition: opacity 400ms ease-in;
+	transition: opacity 400ms ease-in;
+	pointer-events: none;
+}
+
+.dialog {
+	opacity: 0;
+	-webkit-transition: opacity 400ms ease-in;
+	-moz-transition: opacity 400ms ease-in;
+	transition: opacity 400ms ease-in;
+	pointer-events: none;
+}
+
+.modalDialog.visible,
+.dialog.visible {
+	opacity: 1;
+	pointer-events: auto;
+}
+
+.dialog>div,
+.modalDialog>div {
+	position: fixed;
+	top: 50px;
+	left: 50%;
+	border: 1px solid #1d61a6;
+	border-radius: 10px;
+	background: #FFF;
+	min-width: 100px;
+	min-height: 100px;
+	padding: 5px;
+	-webkit-box-shadow: 0px 0px 10px 8px rgba(0, 0, 0, 0.4);
+	-moz-box-shadow: 0px 0px 10px 8px rgba(0, 0, 0, 0.4);
+	box-shadow: 0px 0px 10px 8px rgba(0, 0, 0, 0.4);
+	z-index: 9999;
+}
+
+.dialog-content {
+	overflow: hidden;
+}
+
+.dialog>div .close,
+.modalDialog>div .close {
+	background: #1d61a6;
+	color: #FFFFFF;
+	line-height: 25px;
+	position: absolute;
+	right: -12px;
+	text-align: center;
+	top: -10px;
+	width: 24px;
+	text-decoration: none;
+	font-weight: bold;
+	-webkit-border-radius: 12px;
+	-moz-border-radius: 12px;
+	border-radius: 12px;
+	-moz-box-shadow: 0px 0px 3px #000;
+	-webkit-box-shadow: 0px 0px 3px #000;
+	box-shadow: 0px 0px 3px #000;
+	cursor: pointer;
+	z-index: 10000;
+}
+
+
+/******************************/
+
+
+/******** Icons 16x16 *********/
+
+
+/******************************/
+
+.icon {
+	background-image: url(../img/shapes/shapes_87180C.png);
+	background-repeat: no-repeat;
+	width: 16px;
+	height: 16px;
+	display: inline-block;
+	text-indent: -99999px;
+	overflow: hidden;
+}
+
+.icon-add {
+	background-position: 0px 0px;
+}
+
+.icon-cancel {
+	background-position: -16px 0px;
+}
+
+.icon-check {
+	background-position: -32px 0px;
+}
+
+.icon-magnifier {
+	background-position: -48px 0px;
+}
+
+.icon-person {
+	background-position: -64px 0px;
+}
+
+.icon-home {
+	background-position: -80px 0px;
+}
+
+.icon-letter {
+	background-position: -96px 0px;
+}
+
+.icon-note {
+	background-position: -112px 0px;
+}
+
+.icon-locate {
+	background-position: -128px 0px;
+}
+
+.icon-folder {
+	background-position: -144px 0px;
+}
+
+.icon-heart {
+	background-position: 0px -16px;
+}
+
+.icon-circle-left {
+	background-position: -16px -16px;
+}
+
+.icon-circle-right {
+	background-position: -32px -16px;
+}
+
+.icon-questionmark {
+	background-position: -48px -16px;
+}
+
+.icon-exclamation {
+	background-position: -64px -16px;
+}
+
+.icon-circle-down {
+	background-position: -80px -16px;
+}
+
+.icon-circle-up {
+	background-position: -96px -16px;
+}
+
+.icon-pen {
+	background-position: -112px -16px;
+}
+
+.icon-arrow-up {
+	background-position: -128px -16px;
+}
+
+.icon-arrow-down {
+	background-position: -144px -16px;
+}
+
+.icon-lock {
+	background-position: 0px -32px;
+}
+
+.icon-geo {
+	background-position: -16px -32px;
+}
+
+.icon-gear {
+	background-position: -32px -32px;
+}
+
+.icon-grid {
+	background-position: -48px -32px;
+}
+
+.icon-list {
+	background-position: -64px -32px;
+}
+
+.icon-file {
+	background-position: -80px -32px;
+}
+
+.icon-eye {
+	background-position: -96px -32px;
+}
+
+.icon-tag {
+	background-position: -112px -32px;
+}
+
+.icon-image {
+	background-position: -128px -32px;
+}
+
+.icon-movie {
+	background-position: -144px -32px;
+}
+
+.icon-cam {
+	background-position: 0px -48px;
+}
+
+.icon-music {
+	background-position: -16px -48px;
+}
+
+.icon-trash {
+	background-position: -32px -48px;
+}
+
+.icon-add-column {
+	background-position: -48px -48px;
+}
+
+.icon-sort {
+	background-position: -64px -48px;
+}
+
+.icon-documents {
+	background-position: -80px -48px;
+}
+
+
+/******************************/
+
+
+/******** Icons 10x10 *********/
+
+
+/******************************/
+
+.icon10 {
+	background-image: url(../img/shapes/shapes_10x10_87180C.png);
+	background-repeat: no-repeat;
+	width: 10px;
+	height: 10px;
+	display: inline-block;
+	text-indent: -99999px;
+	overflow: hidden;
+}
+
+.icon10-add {
+	background-position: 0px 0px;
+}
+
+.icon10-cancel {
+	background-position: -10px 0px;
+}
+
+.icon10-check {
+	background-position: -20px 0px;
+}
+
+.icon10-magnifier {
+	background-position: -30px 0px;
+}
+
+.icon10-person {
+	background-position: -40px 0px;
+}
+
+.icon10-home {
+	background-position: -50px 0px;
+}
+
+.icon10-letter {
+	background-position: -60px 0px;
+}
+
+.icon10-note {
+	background-position: -70px 0px;
+}
+
+.icon10-locate {
+	background-position: -80px 0px;
+}
+
+.icon10-folder {
+	background-position: -90px 0px;
+}
+
+.icon10-heart {
+	background-position: 0px -10px;
+}
+
+.icon10-circle-left {
+	background-position: -10px -10px;
+}
+
+.icon10-circle-right {
+	background-position: -20px -10px;
+}
+
+.icon10-questionmark {
+	background-position: -30px -10px;
+}
+
+.icon10-exclamation {
+	background-position: -40px -10px;
+}
+
+.icon10-circle-down {
+	background-position: -50px -10px;
+}
+
+.icon10-circle-up {
+	background-position: -60px -10px;
+}
+
+.icon10-pen {
+	background-position: -70px -10px;
+}
+
+.icon10-arrow-up {
+	background-position: -80px -10px;
+}
+
+.icon10-arrow-down {
+	background-position: -90px -10px;
+}
+
+.icon10-lock {
+	background-position: 0px -20px;
+}
+
+.icon10-geo {
+	background-position: -10px -20px;
+}
+
+.icon10-gear {
+	background-position: -20px -20px;
+}
+
+.icon10-grid {
+	background-position: -30px -20px;
+}
+
+.icon10-list {
+	background-position: -40px -20px;
+}
+
+.icon10-file {
+	background-position: -50px -20px;
+}
+
+.icon10-eye {
+	background-position: -60px -20px;
+}
+
+.icon10-tag {
+	background-position: -70px -20px;
+}
+
+.icon10-image {
+	background-position: -80px -20px;
+}
+
+.icon10-movie {
+	background-position: -90px -20px;
+}
+
+.icon10-cam {
+	background-position: 0px -30px;
+}
+
+.icon10-music {
+	background-position: -10px -30px;
+}
+
+.icon10-trash {
+	background-position: -20px -30px;
+}
+
+.icon10-add-column {
+	background-position: -30px -30px;
+}
+
+.icon10-sort {
+	background-position: -40px -30px;
+}
+
+.icon10-documents {
+	background-position: -50px -30px;
+}
+
+
+/******************************/
+
+
+/******* Form elements ********/
+
+
+/******************************/
+
+input,
+textarea,
+select {
+	border: 1px solid #E0E0E0;
+	width: 200px;
+	font-family: "lato_regular", arial;
+	resize: none;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+	width: 16px;
+	margin: 0;
+}
+
+button,
+input[type="submit"],
+input[type="reset"],
+input[type="button"] {
+	height: 20px;
+	background-color: #1d61a6;
+	border: 1px solid #1d61a6;
+	border-radius: 3px;
+	color: #FFF;
+	margin-bottom: 0.5em;
+	width: 80px;
+	cursor: pointer;
+}
+
+button:disabled,
+input[type="submit"]:disabled,
+input[type="reset"]:disabled,
+input[type="button"]:disabled {
+	height: 20px;
+	background-color: #9f463d;
+	border: 1px solid #9f463d;
+	border-radius: 3px;
+	color: #FFF;
+	margin-bottom: 0.5em;
+	width: 80px;
+}
+
+input.ng-valid {}
+
+input.ng-invalid {
+	border: 1px solid #1d61a6;
+}
+
+input.ng-pristine {}
+
+input.ng-dirty {}
+
+input.ng-touched {}
+
+input.ng-invalid-required {}
+
+input.ng-invalid-minlength {}
+
+input.ng-valid-max-length {}
+
+/******************************/
+
+
+/********* ng-table ***********/
+
+
+/******************************/
+
+.ng-table th {
+	text-align: left;
+}
+
+.ng-table th.sortable.sort-asc,
+.ng-table th.sortable.sort-desc {
+	background-color: transparent;
+	text-shadow: none;
+}
+
+
+/******************************/
+
+
+/**** growl-notifications *****/
+
+
+/******************************/
+
+growl-notifications {
+	position: fixed;
+	top: 50px;
+	left: 0;
+	right: 0;
+	z-index: 1000;
+}
+
+growl-notifications growl-notification {
+	color: white;
+	display: block;
+	border-radius: 5px;
+	margin: 0 auto 5px;
+	width: 300px;
+	min-height: 20px;
+	line-height: 20px;
+	padding: 0 5px;
+	text-align: center;
+}
+
+growl-notifications growl-notification.success {
+	background-color: #1E8034;
+}
+
+growl-notifications growl-notification.error {
+	background-color: #1d61a6;
+}

@@ -7,6 +7,7 @@
   <link rel="stylesheet" type="text/css" href="resources/bower_components/angular-hotkeys/build/hotkeys.min.css">
   <link rel="stylesheet" type="text/css" href="resources/css/reset.css">
   <link rel="stylesheet" type="text/css" href="resources/css/taskplanner.css">
+  <link rel="stylesheet" type="text/css" href="resources/css/ui.css">
 
   <script type="text/javascript" src="resources/bower_components/angular/angular.js"></script>
   <script type="text/javascript" src="resources/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
@@ -20,6 +21,7 @@
   <script type="text/javascript" src="resources/bower_components/angular-growl-notifications/dist/angular-growl-notifications.min.js"></script>
 
   <script type="text/javascript" src="resources/js/taskplanner.js"></script>
+  <script type="text/javascript" src="resources/js/controller/header-controller.js"></script>
   <script type="text/javascript" src="resources/js/services/auth-service.js"></script>
 
   <script type="text/javascript" src="resources/bower_components/moment/moment.js"></script>
@@ -28,6 +30,58 @@
 </head>
 
 <body>
+  <header ng-controller="HeaderController">
+    <div class="wrapper">
+      <div id="taskplanner-title" class="floatleft clearfix">
+        <span>{{'GLOBAL.TITLE' | translate}}</span>
+      </div>
+      <div id="glyph-container" class="clearfix" authenticated>
+        <div class="header-item">
+          <a ng-click="logout()">
+            <span id="logout-glyph" class="header-glyph">
+              <img src="resources/img/shapes/logout.png" style="margin-top: 2px; margin-left: 4px;"/>
+            </span>
+            <span>{{'NAVIGATION.LOGOUT' | translate}}</span>
+          </a>
+        </div>
+        <div class="header-item">
+          <a ui-sref="profile.personal">
+            <span id="profile-glyph" class="header-glyph" ng-style="avatar()">
+              <img src="resources/img/shapes/person.png" style="margin-top: 2px;" ng-if="!avatar()"/>
+            </span>
+            <span>{{'NAVIGATION.PROFILE' | translate}}</span>
+          </a>
+        </div>
+        <div class="header-item">
+          <a ui-sref="home">
+            <span id="home-glyph" class="header-glyph">
+              <img src="resources/img/shapes/home.png" style="margin-top: 2px;"/>
+            </span>
+            <span>{{'NAVIGATION.HOME' | translate}}</span>
+          </a>
+        </div>
+      </div>
+      <div id="glyph-container-anon" class="clearfix" authenticated="false">
+        <div class="header-item">
+          <a ui-sref="login">
+            <span id="login-glyph" class="header-glyph">
+              <img src="resources/img/shapes/login.png" style="margin-top: 2px; margin-left: -2px;"/>
+            </span>
+            <span>{{'NAVIGATION.LOGIN' | translate}}</span>
+          </a>
+        </div>
+        <div class="header-item" data-ng-hide="$state.include('home')">
+          <a ui-sref="home">
+            <span id="home-glyph" class="header-glyph">
+              <img src="resources/img/shapes/home.png" style="margin-top: 2px;"/>
+            </span>
+            <span>{{'NAVIGATION.HOME' | translate}}</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
   <section id="content-container" class="wrapper">
     <growl-notifications> </growl-notifications>
     <div ng-repeat="(id, notification) in notifications track by id">

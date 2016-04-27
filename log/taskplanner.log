@@ -55,3 +55,6 @@
 {"level":"info","message":"   Passport initialized","timestamp":"2016-04-27T17:43:37.657Z"}
 {"level":"info","message":"   Taskplanner listening at http://:::8080","timestamp":"2016-04-27T17:43:37.857Z"}
 {"level":"info","message":"   Connected to MongoDB","timestamp":"2016-04-27T17:43:37.896Z"}
+{"level":"info","message":"   Passport initialized","timestamp":"2016-04-27T18:48:15.121Z"}
+{"level":"info","message":"   Taskplanner listening at http://:::8080","timestamp":"2016-04-27T18:48:15.460Z"}
+{"level":"info","message":"   Connected to MongoDB","timestamp":"2016-04-27T18:48:15.515Z"}
