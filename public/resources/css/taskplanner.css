@@ -1,111 +1,135 @@
 @CHARSET "UTF-8";
 body {
-	font-family: 'lato_regular';
-	font-size: 12px;
-	background: #FFF;
+  font-family: 'lato_regular';
+  font-size: 12px;
+  background: #FFF;
 }
 
 header {
-	width: 100%;
-	height: 50px;
-	background: #F0F0F0;
-	position: fixed;
-	z-index: 999;
+  width: 100%;
+  height: 50px;
+  background: #F0F0F0;
+  position: fixed;
+  z-index: 999;
 }
 
 .wrapper {
-	max-width: 1200px;
-	height: auto;
-	margin: 0 auto;
-	position: relative;
+  max-width: 1200px;
+  height: auto;
+  margin: 0 auto;
+  position: relative;
 }
 
 #taskplanner-title span {
-	font-family: "felipa";
-	font-size: 35px;
-	margin-top: 3px;
-	display: block;
-	color: #1d61a6;
+  font-family: "lato_regular";
+  font-size: 35px;
+  margin-top: 3px;
+  display: block;
+  color: #1d61a6;
 }
 
 #glyph-container {
-	margin-top: 5px;
+  margin-top: 5px;
 }
 
 #glyph-container-anon {
-	margin-top: 5px;
+  margin-top: 5px;
 }
 
 #profile-glyph {
-	overflow: hidden;
+  overflow: hidden;
 }
 
 .header-item {
-	float: right;
-	margin-left: 0.5em;
-	text-align: center;
-	width: 40px;
-	overflow: hidden;
-	cursor: pointer;
+  float: right;
+  margin-left: 0.5em;
+  text-align: center;
+  width: 40px;
+  overflow: hidden;
+  cursor: pointer;
 }
 
 .header-item span {
-	font-size: 10px;
+  font-size: 10px;
 }
 
 #login-container {
-	margin: 15px auto;
-	width: 200px;
-	text-align: center;
+  margin: 15px auto;
+  width: 200px;
+  text-align: center;
 }
 
 #login-container input {
-	height: 20px;
-	width: 150px;
-	margin-bottom: 10px;
+  height: 20px;
+  width: 150px;
+  margin-bottom: 10px;
 }
 
 #error-container {
-	margin: 15px auto;
-	text-align: left;
+  margin: 15px auto;
+  text-align: left;
 }
 
 h2 {
-	color: #4e4e4e;
-	font-family: "lato_regular", arial;
-	font-size: 12px;
-	margin-bottom: 2em;
-	letter-spacing: 1px;
-	border-bottom: 1px solid #1d61a6;
-	line-height: 20px;
+  color: #4e4e4e;
+  font-family: "lato_regular", arial;
+  font-size: 12px;
+  margin-bottom: 2em;
+  letter-spacing: 1px;
+  border-bottom: 1px solid #1d61a6;
+  line-height: 20px;
 }
 
 footer {
-	width: 100%;
-	position: absolute;
-	bottom: 0;
-	background: #E0E0E0;
-	padding: 1em;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  background: #E0E0E0;
+  padding: 1em;
 }
 
 footer p {
-	font-style: italic;
-	color: #3b3b3b;
-	font-family: "lato_regular", arial;
-	font-size: 12px;
-	text-align: center;
+  font-style: italic;
+  color: #3b3b3b;
+  font-family: "lato_regular", arial;
+  font-size: 12px;
+  text-align: center;
 }
 
 ul {
-	list-style-position: inside;
+  list-style-position: inside;
 }
 
 li {
-	list-style-type: none;
+  list-style-type: none;
 }
 
 #logincontainer {
-	float: right;
-	line-height: 80px;
-	color: #FFF;
+  float: right;
+  line-height: 80px;
+  color: #FFF;
+}
+
+#content-container {
+  padding-bottom: 40px;
+  padding-top: 50px;
+}
+
+#content-container a {
+  text-decoration: none;
+  color: #353434;
+}
+
+#content-container .navigation-entry a:hover {
+  color: #353434;
+  font-weight: bold;
+}
+
+#content-container .navigation-entry a.navigation-active {
+  font-weight: bold;
+  color: #353434;
+}
+
+#content-container .navigation-entry a {
+  color: #666;
 }
