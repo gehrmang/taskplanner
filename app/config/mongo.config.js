@@ -1,6 +1,5 @@
 /*
- * mongo.config.js: Copyright (C) 2015 Gerry Gehrmann. All rights reserved. Use
- * is subject to JASP license terms.
+ * mongo.config.js: GNU GENERAL PUBLIC LICENSE Version 3
  */
 (function() {
   'use strict';

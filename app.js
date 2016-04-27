@@ -19,6 +19,7 @@
   var cookieParser = require('cookie-parser');
   var session = require('express-session');
   var bodyParser = require('body-parser');
+  var passport = require('passport');
   var winston = require('winston');
   var EventEmitter = require('events').EventEmitter;
 
@@ -39,6 +40,7 @@
   /** ******************************** */
   var hostConfig = require('config').get('host');
   require('./app/config/mongo.config')(messageBus);
+  require('./app/config/passport.config');
 
   /** ******************************** */
   /** ****** Controller modules ****** */
@@ -48,6 +50,7 @@
   /** ******************************** */
   /** ******** Route modules ********* */
   /** ******************************** */
+  var auth = require('./app/routes/auth.routes');
 
   /** ******************************** */
   /** ** Application initialization ** */
@@ -76,12 +79,17 @@
   /** Access restrictions */
   app.use(function(req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type,Authorization');
     next();
   });
 
+  /** Passport initialization */
+  app.use(passport.initialize());
+  app.use(passport.session());
+
   /** Web routes initialization */
   app.use(express.static('public'));
+  app.use('/auth', auth);
 
   /** ******************************** */
   /** ******* Start the server ******* */

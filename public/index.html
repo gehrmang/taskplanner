@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="jasp">
+<html lang="en" ng-app="taskplanner">
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -9,7 +9,8 @@
   <link rel="stylesheet" type="text/css" href="resources/css/taskplanner.css">
 
   <script type="text/javascript" src="resources/bower_components/angular/angular.js"></script>
-  <script type="text/javascript" src="resources/bower_components/ui-router/angular-ui-router.min.js"></script>
+  <script type="text/javascript" src="resources/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+  <script type="text/javascript" src="resources/bower_components/angular-cookies/angular-cookies.min.js"></script>
 
   <script type="text/javascript" src="resources/bower_components/angular-translate/angular-translate.js"></script>
   <script type="text/javascript" src="resources/bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.min.js"></script>
@@ -19,6 +20,7 @@
   <script type="text/javascript" src="resources/bower_components/angular-growl-notifications/dist/angular-growl-notifications.min.js"></script>
 
   <script type="text/javascript" src="resources/js/taskplanner.js"></script>
+  <script type="text/javascript" src="resources/js/services/auth-service.js"></script>
 
   <script type="text/javascript" src="resources/bower_components/moment/moment.js"></script>
   <script type="text/javascript" src="resources/bower_components/moment/locale/de.js"></script>

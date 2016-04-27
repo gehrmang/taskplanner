@@ -11,3 +11,47 @@
 {"level":"info","message":"   Connected to MongoDB","timestamp":"2016-04-26T17:27:11.247Z"}
 {"level":"info","message":"   Taskplanner listening at http://:::8080","timestamp":"2016-04-26T17:27:29.782Z"}
 {"level":"info","message":"   Connected to MongoDB","timestamp":"2016-04-26T17:27:31.007Z"}
+{"level":"info","message":"   Taskplanner listening at http://:::8080","timestamp":"2016-04-26T18:04:28.740Z"}
+{"level":"info","message":"   Connected to MongoDB","timestamp":"2016-04-26T18:04:30.255Z"}
+{"level":"info","message":"   Taskplanner listening at http://:::8080","timestamp":"2016-04-27T10:53:46.184Z"}
+{"message":"  ","name":"MongoError","stack":"Error: connect ECONNREFUSED 127.0.0.1:27017\n    at Object.exports._errnoException (util.js:870:11)\n    at exports._exceptionWithHostPort (util.js:893:20)\n    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1057:14)","level":"error","timestamp":"2016-04-27T10:53:46.207Z"}
+{"level":"info","message":"   Taskplanner listening at http://:::8080","timestamp":"2016-04-27T10:54:34.923Z"}
+{"level":"info","message":"   Connected to MongoDB","timestamp":"2016-04-27T10:54:34.965Z"}
+{"level":"info","message":"   Taskplanner shutdown at Wed Apr 27 2016 10:55:19 GMT+0000 (UTC)","timestamp":"2016-04-27T10:55:19.259Z"}
+{"level":"info","message":"   Taskplanner listening at http://:::8080","timestamp":"2016-04-27T10:55:35.704Z"}
+{"message":"  ","name":"MongoError","stack":"MongoError: auth failed\n    at Function.MongoError.create (/home/ubuntu/workspace/node_modules/mongoose/node_modules/mongodb/node_modules/mongodb-core/lib/error.js:31:11)\n    at commandCallback (/home/ubuntu/workspace/node_modules/mongoose/node_modules/mongodb/node_modules/mongodb-core/lib/topologies/server.js:1135:66)\n    at Callbacks.emit (/home/ubuntu/workspace/node_modules/mongoose/node_modules/mongodb/node_modules/mongodb-core/lib/topologies/server.js:116:3)\n    at messageHandler (/home/ubuntu/workspace/node_modules/mongoose/node_modules/mongodb/node_modules/mongodb-core/lib/topologies/server.js:291:23)\n    at Socket.dataHandler (/home/ubuntu/workspace/node_modules/mongoose/node_modules/mongodb/node_modules/mongodb-core/lib/connection/connection.js:285:22)\n    at emitOne (events.js:77:13)\n    at Socket.emit (events.js:169:7)\n    at readableAddChunk (_stream_readable.js:146:16)\n    at Socket.Readable.push (_stream_readable.js:110:10)\n    at TCP.onread (net.js:529:20)","ok":0,"errmsg":"auth failed","code":18,"level":"error","timestamp":"2016-04-27T10:55:35.763Z"}
+{"level":"info","message":"   Taskplanner listening at http://:::8080","timestamp":"2016-04-27T10:56:06.149Z"}
+{"level":"info","message":"   Connected to MongoDB","timestamp":"2016-04-27T10:56:06.174Z"}
+{"level":"info","message":"   Taskplanner listening at http://:::8080","timestamp":"2016-04-27T16:13:50.494Z"}
+{"level":"info","message":"   Connected to MongoDB","timestamp":"2016-04-27T16:13:50.544Z"}
+{"level":"info","message":"   Passport initialized","timestamp":"2016-04-27T16:28:04.550Z"}
+{"level":"info","message":"   Taskplanner listening at http://:::8080","timestamp":"2016-04-27T16:28:04.737Z"}
+{"level":"info","message":"   Connected to MongoDB","timestamp":"2016-04-27T16:28:04.786Z"}
+{"level":"info","message":"   Passport initialized","timestamp":"2016-04-27T16:48:11.600Z"}
+{"level":"info","message":"   Taskplanner listening at http://:::8080","timestamp":"2016-04-27T16:48:11.693Z"}
+{"level":"info","message":"   Connected to MongoDB","timestamp":"2016-04-27T16:48:11.717Z"}
+{"level":"info","message":"   Passport initialized","timestamp":"2016-04-27T17:05:55.392Z"}
+{"level":"info","message":"   Passport initialized","timestamp":"2016-04-27T17:12:21.166Z"}
+{"level":"info","message":"   Passport initialized","timestamp":"2016-04-27T17:16:20.828Z"}
+{"level":"info","message":"   Passport initialized","timestamp":"2016-04-27T17:19:49.064Z"}
+{"level":"info","message":"   Passport initialized","timestamp":"2016-04-27T17:20:57.721Z"}
+{"level":"info","message":"   Passport initialized","timestamp":"2016-04-27T17:21:46.066Z"}
+{"level":"info","message":"   Passport initialized","timestamp":"2016-04-27T17:22:08.952Z"}
+{"level":"info","message":"   Passport initialized","timestamp":"2016-04-27T17:24:13.955Z"}
+{"level":"info","message":"   Passport initialized","timestamp":"2016-04-27T17:25:09.127Z"}
+{"level":"info","message":"   Passport initialized","timestamp":"2016-04-27T17:26:21.459Z"}
+{"level":"info","message":"   Taskplanner listening at http://:::8080","timestamp":"2016-04-27T17:26:21.570Z"}
+{"level":"info","message":"   Connected to MongoDB","timestamp":"2016-04-27T17:26:21.592Z"}
+{"level":"info","message":"   Passport initialized","timestamp":"2016-04-27T17:27:29.973Z"}
+{"level":"info","message":"   Passport initialized","timestamp":"2016-04-27T17:28:56.644Z"}
+{"level":"info","message":"   Passport initialized","timestamp":"2016-04-27T17:32:12.992Z"}
+{"level":"info","message":"   Passport initialized","timestamp":"2016-04-27T17:33:48.825Z"}
+{"level":"info","message":"   Passport initialized","timestamp":"2016-04-27T17:38:01.147Z"}
+{"level":"info","message":"   Taskplanner listening at http://:::8080","timestamp":"2016-04-27T17:38:01.448Z"}
+{"level":"info","message":"   Connected to MongoDB","timestamp":"2016-04-27T17:38:01.495Z"}
+{"level":"info","message":"   Passport initialized","timestamp":"2016-04-27T17:39:07.760Z"}
+{"level":"info","message":"   Taskplanner listening at http://:::8080","timestamp":"2016-04-27T17:39:07.929Z"}
+{"level":"info","message":"   Connected to MongoDB","timestamp":"2016-04-27T17:39:07.977Z"}
+{"level":"info","message":"   Passport initialized","timestamp":"2016-04-27T17:43:37.657Z"}
+{"level":"info","message":"   Taskplanner listening at http://:::8080","timestamp":"2016-04-27T17:43:37.857Z"}
+{"level":"info","message":"   Connected to MongoDB","timestamp":"2016-04-27T17:43:37.896Z"}

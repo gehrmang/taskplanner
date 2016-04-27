@@ -1,1 +1,4 @@
 config/default.json
+mongod
+data
+data/*
