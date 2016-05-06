@@ -27,10 +27,15 @@
     var dbConfig = require('config').get('database');
 
     /** ******************************** */
+    /** ****** Controller modules ****** */
+    /** ******************************** */
+    var setupConfig = require('./setup.config')(messageBus);
+
+    /** ******************************** */
     /** *** Bootstrap DB connection **** */
     /** ******************************** */
 
-    var db = mongoose.connect('mongodb://' + dbConfig.user + ':' + dbConfig.password + '@' + dbConfig.host + ':' + dbConfig.port + '/' + dbConfig.schema, {}, function(err) {
+    mongoose.connect('mongodb://' + dbConfig.user + ':' + dbConfig.password + '@' + dbConfig.host + ':' + dbConfig.port + '/' + dbConfig.schema, {}, function(err) {
       if (err) {
         winston.error(err);
         winston.error('Could not connect to MongoDB!');
@@ -38,6 +43,11 @@
       }
 
       winston.info('Connected to MongoDB');
+      setupConfig.checkSetup(function(err) {
+        if (err) {
+          throw err;
+        }
+      });
     });
 
     mongoose.connection.on('error', function(err) {

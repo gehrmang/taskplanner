@@ -36,7 +36,7 @@
         }
 
         toggleVisibilityBasedOnPermission();
-        scope.$on('permissionsChanged', toggleVisibilityBasedOnPermission);
+        scope.$on('authentication', toggleVisibilityBasedOnPermission);
       }
     };
   }

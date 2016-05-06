@@ -104,6 +104,26 @@ li {
   list-style-type: none;
 }
 
+table tr {
+  line-height: 20px;
+  border-bottom: 1px dotted #E0E0E0;
+}
+
+table tr th {
+  text-align: left;
+  padding: 5px;
+}
+
+table tr th span {}
+
+table tr td {
+  padding: 5px;
+}
+
+table tr td.iconColumn {
+  width: 20px;
+}
+
 #logincontainer {
   float: right;
   line-height: 80px;
@@ -132,4 +152,51 @@ li {
 
 #content-container .navigation-entry a {
   color: #666;
+}
+
+div.title {
+  width: 100%;
+  border-bottom: 1px solid #1d61a6;
+}
+
+li.task-list-item {
+  padding: 5px 0px 5px 0px;
+  line-height: 16px;
+  height: 26px;
+  cursor: pointer;
+  display: block;
+  position: relative;
+}
+
+li.task-list-item:first-child {
+  margin-top: 5px;
+}
+
+.task-list-title {
+  float: left;
+}
+
+.task-list-rename {
+  float: right;
+  visibility: hidden;
+  padding-right: 5px;
+}
+
+.task-list-remove {
+  float: right;
+  visibility: hidden;
+  padding-right: 5px;
+}
+
+li.task-list-item.over,
+li.task-list-item:hover {
+  background: #E0E0E0;
+}
+
+li.task-list-item:hover .task-list-remove {
+  visibility: visible;
+}
+
+li.task-list-item.over:hover .task-list-remove {
+  visibility: hidden;
 }

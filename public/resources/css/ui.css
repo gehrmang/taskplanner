@@ -69,7 +69,7 @@
 }
 
 .title {
-	font-size: 14px;
+	font-size: 12px;
 	font-weight: bold;
 }
 
@@ -175,6 +175,7 @@
 	border-top: 5px solid #1d61a6;
 	overflow: hidden;
 	position: relative;
+	margin-bottom: 1em;
 }
 
 

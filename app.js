@@ -51,6 +51,7 @@
   /** ******** Route modules ********* */
   /** ******************************** */
   var auth = require('./app/routes/auth.routes');
+  var taskLists = require('./app/routes/tasklist.routes');
 
   /** ******************************** */
   /** ** Application initialization ** */
@@ -90,6 +91,7 @@
   /** Web routes initialization */
   app.use(express.static('public'));
   app.use('/auth', auth);
+  app.use('/task', taskLists);
 
   /** ******************************** */
   /** ******* Start the server ******* */

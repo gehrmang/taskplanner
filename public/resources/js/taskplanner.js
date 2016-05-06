@@ -1,5 +1,5 @@
 /* global angular */
-var taskplannerApp = angular.module("taskplanner", ['ui.router', 'ngCookies', 'pascalprecht.translate', 'cfp.hotkeys',
+var taskplannerApp = angular.module("taskplanner", ['ui.router', 'ngCookies', 'ngSanitize', 'pascalprecht.translate', 'cfp.hotkeys',
   'growlNotifications'
 ]);
 
@@ -68,6 +68,7 @@ taskplannerApp.config(['$stateProvider', '$urlRouterProvider', '$translateProvid
       prefix: 'resources/i18n/locale-',
       suffix: '.json'
     }).preferredLanguage('en_US').fallbackLanguage('en_US').useLocalStorage();
+    $translateProvider.useSanitizeValueStrategy('sanitize');
 
     /** **************************************** */
     /** ********* State configuration ********** */
@@ -76,6 +77,7 @@ taskplannerApp.config(['$stateProvider', '$urlRouterProvider', '$translateProvid
       // Home
       url: '/',
       templateUrl: 'partials/content.html',
+      controller: 'ContentController',
       resolve: {
         user: resolveUser
       }
@@ -83,6 +85,13 @@ taskplannerApp.config(['$stateProvider', '$urlRouterProvider', '$translateProvid
       // Login
       url: '/login',
       templateUrl: 'partials/login.html',
+      controller: 'LoginController',
+      resolve: {
+        user: resolveUser
+      }
+    }).state('profile', {
+      url: '/profile',
+      templateUrl: 'partials/profile.html',
       resolve: {
         user: resolveUser
       }

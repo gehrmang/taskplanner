@@ -1,5 +1,5 @@
 /*
- * auth.routes.js: GNU GENERAL PUBLIC LICENSE Version 3
+ * tasklist.routes.js: GNU GENERAL PUBLIC LICENSE Version 3
  */
 (function() {
   "use strict";
@@ -22,16 +22,17 @@
   /** ****** Controller modules ****** */
   /** ******************************** */
   var authController = require('../controllers/auth.controller')();
+  var taskListController = require('../controllers/tasklist.controller')();
 
   /** ******************************** */
   /** ****** Route definitions ******* */
   /** ******************************** */
-  // Login a user
-  router.post('/login', authController.login);
-  // Logout the current user
-  router.post('/logout', authController.logout);
+  // List all available task list of the current user
+  router.get('/', authController.checkAuth, taskListController.list);
+  // Save a given task list
+  router.post('/', authController.checkAuth, taskListController.save);
   // Load a user by its token
-  router.post('/loaduser', authController.loadUser);
+  router.delete('/', authController.checkAuth, taskListController.remove);
 
   // Make the routes available to the Node application
   module.exports = router;

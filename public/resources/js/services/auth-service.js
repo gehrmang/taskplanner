@@ -16,7 +16,7 @@
   AuthService.$inject = ['$rootScope', '$window', '$q', '$http', '$state', '$location', '$translate'];
 
   /**
-   * Media Service implementation
+   * Authentication Service implementation
    * 
    * @class
    * @name AuthService
@@ -77,7 +77,10 @@
         authenticatedUser = data.user;
         $window.sessionStorage.token = data.token;
         $translate.use(authenticatedUser.language);
-        $state.go('home', {owner: authenticatedUser.username});
+        $rootScope.$broadcast('authentication');
+        $state.go('home', {
+          owner: authenticatedUser.username
+        });
       }, function() {
         // Error: authentication failed
       });
@@ -93,10 +96,12 @@
         delete $window.sessionStorage.token;
         authenticatedUser = undefined;
         window.location = '/';
+        $rootScope.$broadcast('authentication');
         $translate.use($translate.preferredLanguage());
       }, function() {
         delete $window.sessionStorage.token;
         authenticatedUser = undefined;
+        $rootScope.$broadcast('authentication');
         window.location = '/';
         $translate.use($translate.preferredLanguage());
       });
@@ -123,6 +128,7 @@
             if (data && data.user) {
               authenticatedUser = data.user;
               $window.sessionStorage.token = data.token;
+              $rootScope.$broadcast('authentication');
               $translate.use(authenticatedUser.language);
               deferred.resolve(authenticatedUser);
             } else {

@@ -27,6 +27,16 @@
    * @param {Object} AuthService - The authentication service
    */
   function HeaderController($rootScope, $scope, $state, AuthService) {
+    
+    /**
+     * Logout the current user.
+     * 
+     * @memberOf HeaderController#
+     */
+    $scope.logout = function() {
+      AuthService.logout();
+    };
+    
   }
 
 })();

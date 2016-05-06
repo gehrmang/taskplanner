@@ -12,6 +12,7 @@
   <script type="text/javascript" src="resources/bower_components/angular/angular.js"></script>
   <script type="text/javascript" src="resources/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
   <script type="text/javascript" src="resources/bower_components/angular-cookies/angular-cookies.min.js"></script>
+  <script type="text/javascript" src="resources/bower_components/angular-sanitize/angular-sanitize.min.js"></script>
 
   <script type="text/javascript" src="resources/bower_components/angular-translate/angular-translate.js"></script>
   <script type="text/javascript" src="resources/bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.min.js"></script>
@@ -23,8 +24,11 @@
   <script type="text/javascript" src="resources/js/taskplanner.js"></script>
   
   <script type="text/javascript" src="resources/js/controller/header-controller.js"></script>
+  <script type="text/javascript" src="resources/js/controller/login-controller.js"></script>
+  <script type="text/javascript" src="resources/js/controller/content-controller.js"></script>
   
   <script type="text/javascript" src="resources/js/services/auth-service.js"></script>
+  <script type="text/javascript" src="resources/js/services/tasklist-service.js"></script>
   
   <script type="text/javascript" src="resources/js/directives/authenticated.js"></script>
 
@@ -49,8 +53,8 @@
           </a>
         </div>
         <div class="header-item">
-          <a ui-sref="profile.personal">
-            <span id="profile-glyph" class="header-glyph" ng-style="avatar()">
+          <a ui-sref="profile">
+            <span id="profile-glyph" class="header-glyph">
               <img src="resources/img/shapes/person.png" style="margin-top: 2px;" ng-if="!avatar()"/>
             </span>
             <span>{{'NAVIGATION.PROFILE' | translate}}</span>

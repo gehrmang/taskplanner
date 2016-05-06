@@ -1,1 +1,16 @@
-login
+<div class="col25" style="padding-left: 0;"></div>
+
+<div class="col50" style="padding-right: 0;">
+  <div class="framed-container" ui-view>
+    <form ng-submit="login(username, password)">
+      <div id="login-container">
+        <span style="display: block; margin-bottom: 10px;">{{'NAVIGATION.LOGIN_MESSAGE' | translate}}</span>
+        <input id="username" type="text" ng-model="username" placeholder="{{'NAVIGATION.USERNAME' | translate}}" />
+        <input id="password" type="password" ng-model="password" placeholder="{{'NAVIGATION.PASSWORD' | translate}}" />
+        <button type="submit">{{'NAVIGATION.LOGIN' | translate}}</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="col25" style="padding-left: 0;"></div>

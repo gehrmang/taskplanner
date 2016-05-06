@@ -1,1 +1,44 @@
-content.html
+<div class="col25">
+  <div class="framed-container">
+    <div class="title">{{'CONTENT.MY_TASK_LISTS' | translate}}</div>
+    <ul class="">
+      <li class="task-list-item" ng-repeat="list in myTaskLists | orderBy:'title'" ng-click="selectTaskList(list)">
+        <div class="clearfix">
+          <div class="task-list-title" ng-hide="list.rename">{{list.title}}</div>
+          <div class="task-list-title" ng-if="list.rename"><input class="task-list-title-input" type="text" ng-model="list.title" ng-blur="saveRename()" ng-click="console.log('click inpu');" /></div>
+          <div class="task-list-rename" ng-click="renameTaskList(list)"><span class="icon10 icon10-pen"></span></div>
+          <div class="task-list-remove" ng-click="removeTaskList(list)"><span class="icon10 icon10-cancel"></span></div>
+        </div>
+      </li>
+      <li class="task-list-item" ng-click="addTaskList()">
+        <div class="clearfix">
+          <div class="task-list-title">{{'CONTENT.ADD_TASK_LIST' | translate}}</div>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div class="framed-container">
+    <div class="title">{{'CONTENT.SHARED_TASK_LISTS' | translate}}</div>
+  </div>
+</div>
+
+<div class="col50">
+  <div class="framed-container">
+    <div class="title" ng-if="taskList">{{taskList.title}}</div>
+    <table class="fullwidth" ng-if="taskList" style="margin-top: 1em;">
+      <tr>
+        <th>{{'CONTENT.TASK.TITLE' | translate}}</th>
+        <th>{{'CONTENT.TASK.DESCRIPTION' | translate}}</th>
+        <th>{{'CONTENT.TASK.DUEDATE' | translate}}</th>
+        <th>{{'CONTENT.TASK.DONE' | translate}}</th>
+      </tr>
+    </table>
+    <div ng-hide="taskList">{{'CONTENT.NO_TASK_LIST_SELECTED' | translate}}</div>
+  </div>
+</div>
+
+<div class="col25">
+  <div class="framed-container">
+    <div class="title">{{'CONTENT.MESSAGES' | translate}}</div>
+  </div>
+</div>

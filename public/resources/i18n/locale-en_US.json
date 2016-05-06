@@ -10,5 +10,19 @@
     },
     "GLOBAL": {
         "TITLE": "Taskplanner"
+    },
+    "CONTENT": {
+        "MY_TASK_LISTS": "My task lists",
+        "SHARED_TASK_LISTS": "Shared task lists",
+        "MESSAGES": "Messages",
+        "TASK_LIST_DEFAULT_TITLE": "New task list",
+        "ADD_TASK_LIST": "Add new",
+        "NO_TASK_LIST_SELECTED": "No task list selected",
+        "TASK": {
+            "TITLE": "Task",
+            "DESCRIPTION": "Description",
+            "DUEDATE": "Due-date",
+            "DONE": "Done"
+        }
     }
 }
