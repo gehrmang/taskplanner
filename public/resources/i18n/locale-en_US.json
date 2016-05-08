@@ -9,7 +9,12 @@
         "USERNAME": "Username"
     },
     "GLOBAL": {
-        "TITLE": "Taskplanner"
+        "TITLE": "Taskplanner",
+        "DATE":  {
+            "en_US": "MM/DD/YYYY",
+            "en_GB": "DD/MM/YYYY",
+            "de_DE": "DD.MM.YYYY"
+        }
     },
     "CONTENT": {
         "MY_TASK_LISTS": "My task lists",

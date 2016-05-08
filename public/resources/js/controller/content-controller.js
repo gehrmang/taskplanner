@@ -14,7 +14,7 @@
 
   angular.module("taskplanner").controller("ContentController", ContentController);
 
-  ContentController.$inject = ['$rootScope', '$scope', '$translate', 'hotkeys', 'AuthService', 'TaskListService'];
+  ContentController.$inject = ['$rootScope', '$scope', '$translate', 'hotkeys', 'uuid4', 'AuthService', 'TaskListService'];
 
   /**
    * The main controller of the content view.
@@ -25,10 +25,11 @@
    * @param {Object} $scope - The scope of this controller
    * @param {Object} $translate - The $translation service
    * @param {Object} hotkeys - The hotkeys service
+   * @param {Object} uuid4 - The uuid4 service
    * @param {Object} AuthService - The authentication service
    * @param {Object} TaskListService - The task list service
    */
-  function ContentController($rootScope, $scope, $translate, hotkeys, AuthService, TaskListService) {
+  function ContentController($rootScope, $scope, $translate, hotkeys, uuid4, AuthService, TaskListService) {
 
     /**
      * The currently selected task list.
@@ -69,6 +70,14 @@
      * @type Object[]
      */
     $scope.messages = [];
+
+    /**
+     * Flag indicating if the task list edit mode is currently enabled.
+     * 
+     * @fieldOf ContentController
+     * @type boolean
+     */
+    $scope.editMode = false;
 
 
     /** ************************************ */
@@ -144,6 +153,17 @@
     };
 
     /**
+     * Enable the edit mode for the currently selected task list.
+     * 
+     * @memberOf ContentController#
+     */
+    $scope.editTaskList = function() {
+      if ($scope.taskList) {
+        $scope.editMode = true;
+      }
+    };
+
+    /**
      * Enable rename mode for the given task list.
      * 
      * @memberOf ContentController#
@@ -203,11 +223,103 @@
         return tl._id;
       }).indexOf(taskList._id);
 
-      $scope.myTaskLists.splice(index, 1);
-      
-      TaskListService.remove(taskList);
+      if (index >= 0) {
+        $scope.myTaskLists.splice(index, 1);
+        TaskListService.remove(taskList);
+      }
     };
 
+    /**
+     * Add a new task to the currently selected task list.
+     * 
+     * @memberOf ContentController#
+     */
+    $scope.addTask = function() {
+      if (!$scope.taskList) {
+        return;
+      }
+
+      $scope.taskList.tasks.push({
+        uuid: uuid4.generate(),
+        title: '',
+        dueDate: undefined,
+        done: false,
+        editMode: true,
+        isNew: true
+      });
+    };
+
+    /**
+     * Enable the edit mode of the given task and backup its current title and due-date.
+     * 
+     * @memberOf ContentController#
+     * @param {Object} task - The task to be edited
+     */
+    $scope.editTask = function(task) {
+      task.backupTitle = task.title;
+      task.backupDueDate = task.dueDate;
+      task.editMode = true;
+    };
+
+    /**
+     * Cancel the edit mode of the given task and restore its original title and due-date.
+     * 
+     * @memberOf ContentController#
+     * @param {Object} task - The task to cancel the edit mode of
+     */
+    $scope.cancelEdit = function(task) {
+      if (task.isNew) {
+        var index = $scope.taskList.tasks.map(function(t) {
+          return t.uuid;
+        }).indexOf(task.uuid);
+
+        if (index >= 0) {
+          $scope.taskList.tasks.splice(index, 1);
+        }
+
+        return;
+      }
+
+      task.title = task.backupTitle;
+      task.dueDate = task.backupDueDate;
+      task.editMode = false;
+
+      delete task.backupTitle;
+      delete task.backupDueDate;
+    };
+
+    /**
+     * Save the given task.
+     * 
+     * @memberOf ContentController#
+     * @param {Object} task - The task to be saved
+     */
+    $scope.saveTask = function(task) {
+      task.editMode = false;
+      delete task.backupTitle;
+      delete task.backupDueDate;
+
+      TaskListService.saveTasks($scope.taskList).then(function() {
+        delete task.isNew;
+      });
+    };
+
+    /**
+     * Remove the given task from the task list.
+     * 
+     * @memberOf ContentController#
+     * @param {Object} task - The task to be removed
+     */
+    $scope.removeTask = function(task) {
+      var index = $scope.taskList.tasks.map(function(t) {
+        return t.uuid;
+      }).indexOf(task.uuid);
+
+      if (index >= 0) {
+        $scope.taskList.tasks.splice(index, 1);
+        TaskListService.saveTasks($scope.taskList);
+      }
+    };
   }
 
 })();

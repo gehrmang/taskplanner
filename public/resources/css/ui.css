@@ -635,6 +635,10 @@ select {
 	resize: none;
 }
 
+input[type="date"] {
+	width: 120px;
+}
+
 input[type="checkbox"],
 input[type="radio"] {
 	width: 16px;
@@ -685,6 +689,7 @@ input.ng-invalid-required {}
 input.ng-invalid-minlength {}
 
 input.ng-valid-max-length {}
+
 
 /******************************/
 

@@ -5,9 +5,11 @@
       <li class="task-list-item" ng-repeat="list in myTaskLists | orderBy:'title'" ng-click="selectTaskList(list)">
         <div class="clearfix">
           <div class="task-list-title" ng-hide="list.rename">{{list.title}}</div>
-          <div class="task-list-title" ng-if="list.rename"><input class="task-list-title-input" type="text" ng-model="list.title" ng-blur="saveRename()" ng-click="console.log('click inpu');" /></div>
-          <div class="task-list-rename" ng-click="renameTaskList(list)"><span class="icon10 icon10-pen"></span></div>
-          <div class="task-list-remove" ng-click="removeTaskList(list)"><span class="icon10 icon10-cancel"></span></div>
+          <div class="task-list-title" ng-if="list.rename">
+            <input class="task-list-title-input" type="text" ng-model="list.title" ng-blur="saveRename()" ng-click="console.log('click inpu');" />
+          </div>
+          <div class="task-list-rename" ng-click="renameTaskList(list)"><span>E</span></div>
+          <div class="task-list-remove" ng-click="removeTaskList(list)"><span>R</span></div>
         </div>
       </li>
       <li class="task-list-item" ng-click="addTaskList()">
@@ -24,16 +26,48 @@
 
 <div class="col50">
   <div class="framed-container">
-    <div class="title" ng-if="taskList">{{taskList.title}}</div>
-    <table class="fullwidth" ng-if="taskList" style="margin-top: 1em;">
+    <div class="title clearfix" ng-if="taskList" ng-hide="editMode">
+      <div class="floatleft">{{taskList.title}}</div>
+      <div class="floatright" ng-click="editTaskList()"><span>edit</span></div>
+      <div class="floatright" ng-click="addTask()"><span>add</span></div>
+    </div>
+    <div class="title" ng-if="editMode">
+      <input type="text" ng-model="taskList.title" />
+    </div>
+    <table class="fullwidth" ng-if="taskList" style="margin-top: 1em;" ng-hide="editMode">
       <tr>
         <th>{{'CONTENT.TASK.TITLE' | translate}}</th>
-        <th>{{'CONTENT.TASK.DESCRIPTION' | translate}}</th>
-        <th>{{'CONTENT.TASK.DUEDATE' | translate}}</th>
-        <th>{{'CONTENT.TASK.DONE' | translate}}</th>
+        <th style="width: 130px;">{{'CONTENT.TASK.DUEDATE' | translate}}</th>
+        <th class="centerColumn" style="width: 50px;">{{'CONTENT.TASK.DONE' | translate}}</th>
+        <th class="iconColumn"></th>
+        <th class="iconColumn"></th>
+      </tr>
+      <tr ng-repeat="task in taskList.tasks">
+        <td>
+          <span ng-hide="task.editMode">{{task.title}}</span>
+          <input type="text" ng-model="task.title" ng-if="task.editMode" style="width: 100%;" />
+        </td>
+        <td>
+          <span ng-hide="task.editMode">{{task.dueDate | localdate}}</span>
+          <input type="date" ng-model="task.dueDate" ng-if="task.editMode" />
+        </td>
+        <td class="centerColumn">
+          <input type="checkbox" ng-model="task.done" />
+        </td>
+        <td>
+          <span ng-hide="task.editMode" ng-click="editTask(task)">E</span>
+          <span ng-if="task.editMode" ng-click="saveTask(task)">S</span>
+        </td>
+        <td>
+          <span ng-hide="task.editMode" ng-click="removeTask(task)">R</span>
+          <span ng-if="task.editMode" ng-click="cancelEdit(task)">C</span>
+        </td>
       </tr>
     </table>
-    <div ng-hide="taskList">{{'CONTENT.NO_TASK_LIST_SELECTED' | translate}}</div>
+    <div ng-if="editMode">
+
+    </div>
+    <div ng-hide="taskList || editMode">{{'CONTENT.NO_TASK_LIST_SELECTED' | translate}}</div>
   </div>
 </div>
 

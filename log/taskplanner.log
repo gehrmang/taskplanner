@@ -82,3 +82,12 @@
 {"level":"info","message":"   Passport initialized","timestamp":"2016-05-06T11:43:09.976Z"}
 {"level":"info","message":"   Taskplanner listening at http://:::8080","timestamp":"2016-05-06T11:43:10.148Z"}
 {"level":"info","message":"   Connected to MongoDB","timestamp":"2016-05-06T11:43:10.171Z"}
+{"level":"info","message":"   Passport initialized","timestamp":"2016-05-08T08:45:10.526Z"}
+{"level":"info","message":"   Taskplanner listening at http://:::8080","timestamp":"2016-05-08T08:45:10.761Z"}
+{"level":"info","message":"   Connected to MongoDB","timestamp":"2016-05-08T08:45:10.783Z"}
+{"level":"info","message":"   Passport initialized","timestamp":"2016-05-08T09:52:32.881Z"}
+{"level":"info","message":"   Taskplanner listening at http://:::8080","timestamp":"2016-05-08T09:52:33.012Z"}
+{"level":"info","message":"   Connected to MongoDB","timestamp":"2016-05-08T09:52:33.032Z"}
+{"level":"info","message":"   Passport initialized","timestamp":"2016-05-08T10:10:28.165Z"}
+{"level":"info","message":"   Taskplanner listening at http://:::8080","timestamp":"2016-05-08T10:10:28.319Z"}
+{"level":"info","message":"   Connected to MongoDB","timestamp":"2016-05-08T10:10:28.349Z"}

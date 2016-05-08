@@ -37,6 +37,7 @@
       list: list,
       listShared: listShared,
       save: save,
+      saveTasks: saveTasks,
       remove: remove
     };
 
@@ -117,6 +118,35 @@
     }
 
     /**
+     * Save the tasks of a specific task list.
+     * 
+     * @memberOf TaskListController#
+     * @param {Object} req - The HTTP request
+     * @param {Object} res - The HTTP response
+     */
+    function saveTasks(req, res) {
+      var taskListId = req.body.taskListId;
+      var tasks = req.body.tasks;
+
+      TaskList.update({
+        _id: taskListId
+      }, {
+        $set: {
+          tasks: tasks,
+          updated_at: new Date()
+        }
+      }, function(err) {
+        if (err) {
+          winston.error(err);
+          res.status(500).send(err);
+          return;
+        }
+
+        res.sendStatus(200);
+      });
+    }
+
+    /**
      * Remove a given task list.
      * 
      * @memberOf TaskListController#
@@ -125,15 +155,17 @@
      */
     function remove(req, res) {
       var taskListId = req.query['tl'];
-      
-      TaskList.find({_id: taskListId}).remove(function(err) {
-          if (err) {
-            winston.error(err);
-            res.status(500).send(err);
-            return;
-          }
-          
-          res.status(200).send();        
+
+      TaskList.find({
+        _id: taskListId
+      }).remove(function(err) {
+        if (err) {
+          winston.error(err);
+          res.status(500).send(err);
+          return;
+        }
+
+        res.status(200).send();
       });
     }
   };

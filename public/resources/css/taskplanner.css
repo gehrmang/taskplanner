@@ -120,8 +120,14 @@ table tr td {
   padding: 5px;
 }
 
+table tr th.iconColumn,
 table tr td.iconColumn {
   width: 20px;
+}
+
+table tr th.centerColumn,
+table tr td.centerColumn {
+  text-align: center;
 }
 
 #logincontainer {
@@ -188,15 +194,11 @@ li.task-list-item:first-child {
   padding-right: 5px;
 }
 
-li.task-list-item.over,
 li.task-list-item:hover {
   background: #E0E0E0;
 }
 
-li.task-list-item:hover .task-list-remove {
+li.task-list-item:hover .task-list-remove,
+li.task-list-item:hover .task-list-rename {
   visibility: visible;
-}
-
-li.task-list-item.over:hover .task-list-remove {
-  visibility: hidden;
 }

@@ -31,9 +31,11 @@
   router.get('/', authController.checkAuth, taskListController.list);
   // Save a given task list
   router.post('/', authController.checkAuth, taskListController.save);
+  // Save the tasks of a specific task list
+  router.post('/tasks', authController.checkAuth, taskListController.saveTasks);
   // Load a user by its token
   router.delete('/', authController.checkAuth, taskListController.remove);
-
+  
   // Make the routes available to the Node application
   module.exports = router;
 })();

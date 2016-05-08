@@ -46,6 +46,7 @@
     var service = {
       list: list,
       save: save,
+      saveTasks: saveTasks,
       remove: remove
     };
 
@@ -87,6 +88,28 @@
 
       return deferred.promise;
     }
+
+    /**
+     * Save the tasks of a specific task list.
+     * 
+     * @memberOf TaskListService#
+     * @param {Object} taskList - The taskList to be saved
+     */
+    function saveTasks(taskList) {
+      var deferred = $q.defer();
+
+      $http.post(REST_BASE_PATH + '/tasks', {
+        taskListId: taskList._id,
+        tasks: taskList.tasks
+      }).then(function(response) {
+        deferred.resolve(response.data);
+      }, function(response) {
+        deferred.reject(response);
+      });
+
+      return deferred.promise;
+    }
+
 
     /**
      * Remove the given task list.

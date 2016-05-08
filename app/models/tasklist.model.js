@@ -30,11 +30,15 @@
       required: true
     },
     tasks: [{
+      uuid: {
+        type: String,
+        required: true,
+        unique: true
+      },
       title: {
         type: String,
         required: true
       },
-      description: String,
       dueDate: Date,
       done: Boolean
     }],
