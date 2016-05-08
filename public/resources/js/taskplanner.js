@@ -1,6 +1,6 @@
 /* global angular */
 var taskplannerApp = angular.module("taskplanner", ['ui.router', 'ngCookies', 'ngSanitize', 'pascalprecht.translate', 'cfp.hotkeys',
-  'growlNotifications', 'uuid'
+  'growlNotifications', 'uuid', 'angular-md5'
 ]);
 
 /**

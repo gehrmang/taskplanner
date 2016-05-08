@@ -21,6 +21,7 @@
   <script type="text/javascript" src="resources/bower_components/angular-hotkeys/build/hotkeys.min.js"></script>
   <script type="text/javascript" src="resources/bower_components/angular-growl-notifications/dist/angular-growl-notifications.min.js"></script>
   <script type="text/javascript" src="resources/bower_components/angular-uuid/uuid.min.js"></script>
+  <script type="text/javascript" src="resources/bower_components/angular-md5/angular-md5.min.js"></script>
 
   <script type="text/javascript" src="resources/js/taskplanner.js"></script>
   <script type="text/javascript" src="resources/js/filter/filters.js"></script>
@@ -56,8 +57,8 @@
         </div>
         <div class="header-item">
           <a ui-sref="profile">
-            <span id="profile-glyph" class="header-glyph">
-              <img src="resources/img/shapes/person.png" style="margin-top: 2px;" ng-if="!avatar()"/>
+            <span id="profile-glyph" class="header-glyph gravatar">
+              <img ng-src="{{getGravatarUrl()}}" />
             </span>
             <span>{{'NAVIGATION.PROFILE' | translate}}</span>
           </a>

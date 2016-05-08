@@ -188,7 +188,8 @@
           username: user.username,
           firstname: user.firstname,
           name: user.name,
-          language: user.language
+          language: user.language,
+          email: user.email
         },
         token: token
       };

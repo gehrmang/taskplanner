@@ -71,8 +71,8 @@
     function _setupInitialAdmin(callback) {
       var newUser = User({
         "username": "admin",
-        "name": "Gehrmann",
-        "firstname": "Gerry",
+        "name": "Admin",
+        "firstname": "Admin",
         "language": "en_US"
       });
       newUser.setPassword('12345', function() {
