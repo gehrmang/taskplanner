@@ -8,8 +8,8 @@
           <div class="task-list-title" ng-if="list.rename">
             <input class="task-list-title-input" type="text" ng-model="list.title" ng-blur="saveRename()" ng-click="console.log('click inpu');" />
           </div>
-          <div class="task-list-rename" ng-click="renameTaskList(list)"><span>E</span></div>
-          <div class="task-list-remove" ng-click="removeTaskList(list)"><span>R</span></div>
+          <div class="task-list-remove" ng-click="removeTaskList(list)"><span class="icon10 icon10-cancel"></span></div>
+          <div class="task-list-rename" ng-click="renameTaskList(list)"><span class="icon10 icon10-pen"></span></div>
         </div>
       </li>
       <li class="task-list-item" ng-click="addTaskList()">
@@ -28,8 +28,8 @@
   <div class="framed-container">
     <div class="title clearfix" ng-if="taskList" ng-hide="editMode">
       <div class="floatleft">{{taskList.title}}</div>
-      <div class="floatright" ng-click="editTaskList()"><span>edit</span></div>
-      <div class="floatright" ng-click="addTask()"><span>add</span></div>
+      <div class="floatright" ng-click="editTaskList()"><span class="icon icon-pen"></span></div>
+      <div class="floatright" ng-click="addTask()"><span class="icon icon-add"></span></div>
     </div>
     <div class="title" ng-if="editMode">
       <input type="text" ng-model="taskList.title" />
@@ -55,12 +55,12 @@
           <input type="checkbox" ng-model="task.done" />
         </td>
         <td>
-          <span ng-hide="task.editMode" ng-click="editTask(task)">E</span>
-          <span ng-if="task.editMode" ng-click="saveTask(task)">S</span>
+          <span class="icon icon-pen" ng-hide="task.editMode" ng-click="editTask(task)"></span>
+          <span class="icon icon-check" ng-if="task.editMode" ng-click="saveTask(task)">S</span>
         </td>
         <td>
-          <span ng-hide="task.editMode" ng-click="removeTask(task)">R</span>
-          <span ng-if="task.editMode" ng-click="cancelEdit(task)">C</span>
+          <span class="icon icon-trash" ng-hide="task.editMode" ng-click="removeTask(task)">R</span>
+          <span class="icon icon-cancel" ng-if="task.editMode" ng-click="cancelEdit(task)">C</span>
         </td>
       </tr>
     </table>

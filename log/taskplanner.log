@@ -101,3 +101,6 @@
 {"level":"info","message":"   Taskplanner listening at http://:::8080","timestamp":"2016-05-08T10:58:20.532Z"}
 {"level":"info","message":"   Connected to MongoDB","timestamp":"2016-05-08T10:58:20.554Z"}
 {"level":"info","message":"   Initial admin user created!","timestamp":"2016-05-08T10:58:20.973Z"}
+{"level":"info","message":"   Passport initialized","timestamp":"2016-05-08T16:01:43.534Z"}
+{"level":"info","message":"   Taskplanner listening at http://:::8080","timestamp":"2016-05-08T16:01:43.748Z"}
+{"level":"info","message":"   Connected to MongoDB","timestamp":"2016-05-08T16:01:43.772Z"}

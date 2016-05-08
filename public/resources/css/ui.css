@@ -310,7 +310,7 @@
 /******************************/
 
 .icon {
-	background-image: url(../img/shapes/shapes_87180C.png);
+	background-image: url(../img/shapes/shapes_1d61a6.png);
 	background-repeat: no-repeat;
 	width: 16px;
 	height: 16px;
@@ -459,10 +459,6 @@
 	background-position: -64px -48px;
 }
 
-.icon-documents {
-	background-position: -80px -48px;
-}
-
 
 /******************************/
 
@@ -473,7 +469,7 @@
 /******************************/
 
 .icon10 {
-	background-image: url(../img/shapes/shapes_10x10_87180C.png);
+	background-image: url(../img/shapes/shapes_10x10_1d61a6.png);
 	background-repeat: no-repeat;
 	width: 10px;
 	height: 10px;
@@ -620,10 +616,6 @@
 
 .icon10-sort {
 	background-position: -40px -30px;
-}
-
-.icon10-documents {
-	background-position: -50px -30px;
 }
 
 
