@@ -78,6 +78,7 @@ taskplannerApp.config(['$stateProvider', '$urlRouterProvider', '$translateProvid
       url: '/',
       templateUrl: 'partials/content.html',
       controller: 'ContentController',
+      controllerAs: 'vm',
       resolve: {
         user: resolveUser
       }
@@ -86,6 +87,7 @@ taskplannerApp.config(['$stateProvider', '$urlRouterProvider', '$translateProvid
       url: '/login',
       templateUrl: 'partials/login.html',
       controller: 'LoginController',
+      controllerAs: 'vm',
       resolve: {
         user: resolveUser
       }

@@ -41,14 +41,14 @@
 </head>
 
 <body>
-  <header ng-controller="HeaderController">
+  <header ng-controller="HeaderController as vm">
     <div class="wrapper">
       <div id="taskplanner-title" class="floatleft clearfix">
         <span>{{'GLOBAL.TITLE' | translate}}</span>
       </div>
       <div id="glyph-container" class="clearfix" authenticated>
         <div class="header-item">
-          <a ng-click="logout()">
+          <a ng-click="vm.logout()">
             <span id="logout-glyph" class="header-glyph">
               <img src="resources/img/shapes/logout.png" style="margin-top: 2px; margin-left: 4px;"/>
             </span>
@@ -58,7 +58,7 @@
         <div class="header-item">
           <a ui-sref="profile">
             <span id="profile-glyph" class="header-glyph gravatar">
-              <img ng-src="{{getGravatarUrl()}}" />
+              <img ng-src="{{vm.getGravatarUrl()}}" />
             </span>
             <span>{{'NAVIGATION.PROFILE' | translate}}</span>
           </a>

@@ -11,7 +11,6 @@
    * @author Gerry Gehrmann
    * @since 0.0.1
    */
-
   angular.module("taskplanner").controller("HeaderController", HeaderController);
 
   HeaderController.$inject = ['$rootScope', '$scope', '$state', 'md5', 'AuthService'];
@@ -32,13 +31,31 @@
     var GRAVATAR_BASE = 'https://www.gravatar.com/avatar/';
 
     /**
+     * The view model of this controller
+     * 
+     * @fieldOf ContentController
+     * @type Object
+     */
+    var vm = this;
+
+    /** ************************************ */
+    /** ******* Function definitions ******* */
+    /** ************************************ */
+    vm.logout = logout;
+    vm.getGravatarUrl = getGravatarUrl;
+
+    /** ************************************ */
+    /** ***** Controller implementation **** */
+    /** ************************************ */
+
+    /**
      * Logout the current user.
      * 
      * @memberOf HeaderController#
      */
-    $scope.logout = function() {
+    function logout() {
       AuthService.logout();
-    };
+    }
 
     /**
      * Generate the user based Gravatar URL.
@@ -46,7 +63,7 @@
      * @memberOf HeaderController#
      * @returns The generated Gravatar URL
      */
-    $scope.getGravatarUrl = function() {
+    function getGravatarUrl() {
       var user = AuthService.getUser();
 
       if (user && user.email) {
@@ -54,7 +71,7 @@
       } else {
         return '/resources/img/shapes/person.png';
       }
-    };
+    }
 
   }
 

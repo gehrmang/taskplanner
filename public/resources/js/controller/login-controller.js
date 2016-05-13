@@ -11,7 +11,6 @@
    * @author Gerry Gehrmann
    * @since 0.0.1
    */
-
   angular.module("taskplanner").controller("LoginController", LoginController);
 
   LoginController.$inject = [ '$scope', 'AuthService' ];
@@ -27,13 +26,30 @@
   function LoginController($scope, AuthService) {
 
     /**
+     * The view model of this controller
+     * 
+     * @fieldOf ContentController
+     * @type Object
+     */
+    var vm = this;
+
+    /** ************************************ */
+    /** ******* Function definitions ******* */
+    /** ************************************ */
+    vm.login = login;
+
+    /** ************************************ */
+    /** ***** Controller implementation **** */
+    /** ************************************ */
+
+    /**
      * Login function that is called when the user clicks the 'Login' button.
      * 
      * @memberOf LoginController
      */
-    $scope.login = function(username, password) {
+    function login(username, password) {
       AuthService.login(username, password);
-    };
+    }
   }
 
 })();

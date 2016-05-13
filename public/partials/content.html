@@ -2,17 +2,17 @@
   <div class="framed-container">
     <div class="title">{{'CONTENT.MY_TASK_LISTS' | translate}}</div>
     <ul class="">
-      <li class="task-list-item" ng-repeat="list in myTaskLists | orderBy:'title'" ng-click="selectTaskList(list)">
+      <li class="task-list-item" ng-repeat="list in vm.myTaskLists | orderBy:'title'" ng-click="vm.selectTaskList(list)">
         <div class="clearfix">
           <div class="task-list-title" ng-hide="list.rename">{{list.title}}</div>
           <div class="task-list-title" ng-if="list.rename">
-            <input class="task-list-title-input" type="text" ng-model="list.title" ng-blur="saveRename()" ng-click="console.log('click inpu');" />
+            <input class="task-list-title-input" type="text" ng-model="list.title" ng-blur="vm.saveRename()" />
           </div>
-          <div class="task-list-remove" ng-click="removeTaskList(list)"><span class="icon10 icon10-cancel"></span></div>
-          <div class="task-list-rename" ng-click="renameTaskList(list)"><span class="icon10 icon10-pen"></span></div>
+          <div class="task-list-remove" ng-click="vm.removeTaskList(list)"><span class="icon10 icon10-cancel"></span></div>
+          <div class="task-list-rename" ng-click="vm.renameTaskList(list)"><span class="icon10 icon10-pen"></span></div>
         </div>
       </li>
-      <li class="task-list-item" ng-click="addTaskList()">
+      <li class="task-list-item" ng-click="vm.addTaskList()">
         <div class="clearfix">
           <div class="task-list-title">{{'CONTENT.ADD_TASK_LIST' | translate}}</div>
         </div>
@@ -26,15 +26,15 @@
 
 <div class="col50">
   <div class="framed-container">
-    <div class="title clearfix" ng-if="taskList" ng-hide="editMode">
-      <div class="floatleft">{{taskList.title}}</div>
-      <div class="floatright" ng-click="editTaskList()"><span class="icon icon-pen"></span></div>
-      <div class="floatright" ng-click="addTask()"><span class="icon icon-add"></span></div>
+    <div class="title clearfix" ng-if="vm.taskList" ng-hide="editMode">
+      <div class="floatleft">{{vm.taskList.title}}</div>
+      <div class="floatright" ng-click="vm.editTaskList()"><span class="icon icon-pen"></span></div>
+      <div class="floatright" ng-click="vm.addTask()"><span class="icon icon-add"></span></div>
     </div>
     <div class="title" ng-if="editMode">
-      <input type="text" ng-model="taskList.title" />
+      <input type="text" ng-model="vm.taskList.title" />
     </div>
-    <table class="fullwidth" ng-if="taskList" style="margin-top: 1em;" ng-hide="editMode">
+    <table class="fullwidth" ng-if="vm.taskList" style="margin-top: 1em;" ng-hide="editMode">
       <tr>
         <th>{{'CONTENT.TASK.TITLE' | translate}}</th>
         <th style="width: 130px;">{{'CONTENT.TASK.DUEDATE' | translate}}</th>
@@ -42,7 +42,7 @@
         <th class="iconColumn"></th>
         <th class="iconColumn"></th>
       </tr>
-      <tr ng-repeat="task in taskList.tasks">
+      <tr ng-repeat="task in vm.taskList.tasks">
         <td>
           <span ng-hide="task.editMode">{{task.title}}</span>
           <input type="text" ng-model="task.title" ng-if="task.editMode" style="width: 100%;" />
@@ -55,19 +55,19 @@
           <input type="checkbox" ng-model="task.done" />
         </td>
         <td>
-          <span class="icon icon-pen" ng-hide="task.editMode" ng-click="editTask(task)"></span>
-          <span class="icon icon-check" ng-if="task.editMode" ng-click="saveTask(task)">S</span>
+          <span class="icon icon-pen" ng-hide="task.editMode" ng-click="vm.editTask(task)"></span>
+          <span class="icon icon-check" ng-if="task.editMode" ng-click="vm.saveTask(task)">S</span>
         </td>
         <td>
-          <span class="icon icon-trash" ng-hide="task.editMode" ng-click="removeTask(task)">R</span>
-          <span class="icon icon-cancel" ng-if="task.editMode" ng-click="cancelEdit(task)">C</span>
+          <span class="icon icon-trash" ng-hide="task.editMode" ng-click="vm.removeTask(task)">R</span>
+          <span class="icon icon-cancel" ng-if="task.editMode" ng-click="vm.cancelEdit(task)">C</span>
         </td>
       </tr>
     </table>
-    <div ng-if="editMode">
+    <div ng-if="vm.editMode">
 
     </div>
-    <div ng-hide="taskList || editMode">{{'CONTENT.NO_TASK_LIST_SELECTED' | translate}}</div>
+    <div ng-hide="vm.taskList || vm.editMode">{{'CONTENT.NO_TASK_LIST_SELECTED' | translate}}</div>
   </div>
 </div>
 

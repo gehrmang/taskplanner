@@ -2,7 +2,7 @@
 
 <div class="col50" style="padding-right: 0;">
   <div class="framed-container" ui-view>
-    <form ng-submit="login(username, password)">
+    <form ng-submit="vm.login(username, password)">
       <div id="login-container">
         <span style="display: block; margin-bottom: 10px;">{{'NAVIGATION.LOGIN_MESSAGE' | translate}}</span>
         <input id="username" type="text" ng-model="username" placeholder="{{'NAVIGATION.USERNAME' | translate}}" />
