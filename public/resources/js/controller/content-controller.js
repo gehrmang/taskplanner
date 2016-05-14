@@ -1,4 +1,4 @@
-/* global angular */
+/* global angular moment */
 /*
  * content-controller.js: GNU GENERAL PUBLIC LICENSE Version 3
  */
@@ -13,7 +13,7 @@
    */
   angular.module("taskplanner").controller("ContentController", ContentController);
 
-  ContentController.$inject = ['$rootScope', '$scope', '$translate', 'hotkeys', 'uuid4', 'AuthService', 'TaskListService'];
+  ContentController.$inject = ['$rootScope', '$scope', '$mdDialog', '$mdMedia', '$translate', 'hotkeys', 'uuid4', 'AuthService', 'TaskListService'];
 
   /**
    * The main controller of the content view.
@@ -22,13 +22,15 @@
    * @name ContentController
    * @param {Object} $rootScope - The global root scope
    * @param {Object} $scope - The scope of this controller
+   * @param {Object} $mdDialog - The Angular Material dialog service
+   * @param {Object} $mdMedia - The Angular Material media service
    * @param {Object} $translate - The $translation service
    * @param {Object} hotkeys - The hotkeys service
    * @param {Object} uuid4 - The uuid4 service
    * @param {Object} AuthService - The authentication service
    * @param {Object} TaskListService - The task list service
    */
-  function ContentController($rootScope, $scope, $translate, hotkeys, uuid4, AuthService, TaskListService) {
+  function ContentController($rootScope, $scope, $mdDialog, $mdMedia, $translate, hotkeys, uuid4, AuthService, TaskListService) {
 
     /**
      * The view model of this controller
@@ -93,14 +95,18 @@
     vm.addTaskList = addTaskList;
     vm.editTaskList = editTaskList;
     vm.renameTaskList = renameTaskList;
-    vm.saveRename = saveRename;
+    vm.saveTaskList = saveTaskList;
     vm.cancelRename = cancelRename;
     vm.removeTaskList = removeTaskList;
+    vm.shareTaskList = shareTaskList;
+    vm.exportTaskList = exportTaskList;
     vm.addTask = addTask;
     vm.editTask = editTask;
     vm.cancelEdit = cancelEdit;
     vm.saveTask = saveTask;
     vm.removeTask = removeTask;
+    vm.checkDueDate = checkDueDate;
+    vm.confirm = confirm;
 
     /** ************************************ */
     /** ************* Hotkeys ************** */
@@ -113,7 +119,7 @@
     }).add({
       combo: 'return',
       allowIn: ['INPUT', 'SELECT', 'TEXTAREA'],
-      callback: saveRename
+      callback: saveTaskList
     });
 
     /** ************************************ */
@@ -149,7 +155,7 @@
 
       vm.taskList = taskList;
       if (vm.renamingTaskList) {
-        vm.saveRename();
+        vm.saveTaskList();
       }
     }
 
@@ -169,7 +175,7 @@
       vm.myTaskLists.push(newTaskList);
 
       if (vm.renamingTaskList) {
-        vm.saveRename();
+        vm.saveTaskList();
       }
 
       vm.renameTaskList(newTaskList);
@@ -210,11 +216,11 @@
      * 
      * @memberOf ContentController#
      */
-    function saveRename() {
+    function saveTaskList() {
       if (!vm.renamingTaskList) {
         return;
       }
-      
+
       vm.renamingTaskList.rename = false;
       delete vm.renamingTaskList.oriTitle;
       TaskListService.save(vm.renamingTaskList).then(function(result) {
@@ -232,7 +238,7 @@
       if (!vm.renamingTaskList) {
         return;
       }
-      
+
       vm.renamingTaskList.rename = false;
       vm.renamingTaskList.title = vm.renamingTaskList.oriTitle;
       delete vm.renamingTaskList.oriTitle;
@@ -258,6 +264,46 @@
         vm.myTaskLists.splice(index, 1);
         TaskListService.remove(taskList);
       }
+    }
+
+    /**
+     * Open the share dialog for the current task list.
+     * 
+     * @memberOf ContentController#
+     */
+    function shareTaskList(event) {
+      var useFullScreen = ($mdMedia('sm') || $mdMedia('xs')) && $scope.customFullscreen;
+      $mdDialog.show({
+          controller: 'ShareDialogController',
+          controllerAs: 'sdc',
+          templateUrl: '/partials/dialogs/share-dialog.html',
+          parent: angular.element(document.body),
+          targetEvent: event,
+          clickOutsideToClose: true,
+          fullscreen: useFullScreen,
+          bindToController: true,
+          locals: {
+            taskList: vm.taskList
+          }
+        })
+        .then(function() {
+          TaskListService.save(vm.taskList);
+        }, function() {});
+
+      $scope.$watch(function() {
+        return $mdMedia('xs') || $mdMedia('sm');
+      }, function(wantsFullScreen) {
+        $scope.customFullscreen = (wantsFullScreen === true);
+      });
+    }
+
+    /**
+     * Export the current task list.
+     * 
+     * @memberOf ContentController#
+     */
+    function exportTaskList() {
+
     }
 
     /**
@@ -289,6 +335,10 @@
     function editTask(task) {
       task.backupTitle = task.title;
       task.backupDueDate = task.dueDate;
+
+      if (task.dueDate) {
+        task.dueDate = new Date(task.dueDate);
+      }
       task.editMode = true;
     }
 
@@ -350,6 +400,49 @@
         vm.taskList.tasks.splice(index, 1);
         TaskListService.saveTasks(vm.taskList);
       }
+    }
+
+    /**
+     * Check if the given task is overdue.
+     * 
+     * @memberOf ContentController#
+     * @param {Object} task - The task to be checked
+     */
+    function checkDueDate(task) {
+      if (!task || !task.dueDate || task.done) {
+        return false;
+      }
+
+      var dueDate = moment(task.dueDate);
+      var today = moment().startOf('day');
+      if (dueDate.isSame(today)) {
+        return 'dueToday';
+      }
+
+      if (dueDate.isBefore(today)) {
+        return 'overdue';
+      }
+    }
+
+    /**
+     * Show a confirm dialog with the given message.
+     * 
+     * @memberOf ContentController#
+     * @param {Object} event - The target event
+     * @param {string} messageKey - The confirmation message key
+     * @param {Object} targetObject - The object this confirmation is about. Will be handed over to onConfirm.
+     * @callback onConfirm
+     */
+    function confirm(event, messageKey, targetObject, onConfirm) {
+      var confirm = $mdDialog.confirm()
+        .textContent($translate.instant(messageKey))
+        .targetEvent(event)
+        .ok($translate.instant('GLOBAL.OK'))
+        .cancel($translate.instant('GLOBAL.CANCEL'));
+
+      $mdDialog.show(confirm).then(function() {
+        onConfirm(targetObject);
+      }, function() {});
     }
   }
 

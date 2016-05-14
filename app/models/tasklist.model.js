@@ -43,7 +43,7 @@
       done: Boolean
     }],
     owner: Schema.Types.ObjectId,
-    shared: Boolean,
+    shareMode: String,
     created_at: Date,
     updated_at: Date
   });
@@ -61,8 +61,13 @@
     this.updated_at = currentDate;
 
     // if created_at doesn't exist, add to that field
-    if (!this.created_at)
+    if (!this.created_at) {
       this.created_at = currentDate;
+    }
+
+    if (!this.shareMode) {
+      this.shareMode = 'n';
+    }
 
     next();
   };

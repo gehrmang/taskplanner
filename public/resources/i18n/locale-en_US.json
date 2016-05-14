@@ -10,11 +10,18 @@
     },
     "GLOBAL": {
         "TITLE": "Taskplanner",
-        "DATE":  {
+        "DATE": {
             "en_US": "MM/DD/YYYY",
             "en_GB": "DD/MM/YYYY",
             "de_DE": "DD.MM.YYYY"
-        }
+        },
+        "EDIT": "Edit",
+        "REMOVE": "Remove",
+        "SAVE": "Save",
+        "CANCEL": "Cancel",
+        "OK" : "Ok",
+        "SHARE": "Share",
+        "EXPORT" : "Export"
     },
     "CONTENT": {
         "MY_TASK_LISTS": "My task lists",
@@ -23,11 +30,15 @@
         "TASK_LIST_DEFAULT_TITLE": "New task list",
         "ADD_TASK_LIST": "Add new",
         "NO_TASK_LIST_SELECTED": "No task list selected",
+        "CONFIRM_REMOVE_TASK_LIST": "Are you sure you want to remove this task list?",
+        "SHARE_MODE": "Share mode",
+        "ADD_TASK": "Add task",
         "TASK": {
             "TITLE": "Task",
             "DESCRIPTION": "Description",
             "DUEDATE": "Due-date",
-            "DONE": "Done"
+            "DONE": "Done",
+            "CONFIRM_REMOVE_TASK": "Are you sure you want to remove this task?"
         }
     }
 }

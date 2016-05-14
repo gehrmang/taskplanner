@@ -1,0 +1,37 @@
+md-dialog {
+  border-top: 5px solid #1d61a6;
+}
+
+.md-dialog-content .md-title {
+  display: none;
+}
+
+md-dialog .md-dialog-content {
+  padding: 15px 10px;
+}
+
+md-dialog .md-actions,
+md-dialog md-dialog-actions {
+  padding: 0;
+  justify-content: center;
+  min-height: 40px;
+}
+
+md-dialog .md-actions .md-button,
+md-dialog md-dialog-actions .md-button {
+  padding: 0;
+  margin: 0 5px;
+  min-height: 20px;
+  font-size: 12px;
+  line-height: 20px;
+  text-transform: inherit;
+}
+
+a.md-button.md-default-theme:not([disabled]):hover,
+a.md-button:not([disabled]):hover,
+.md-button.md-default-theme:not([disabled]):hover,
+.md-button:not([disabled]):hover,
+.md-button.md-focused {
+  background-color: #1d61a6 !important;
+}
+

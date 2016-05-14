@@ -1,13 +1,13 @@
 /* global angular */
-var taskplannerApp = angular.module("taskplanner", ['ui.router', 'ngCookies', 'ngSanitize', 'pascalprecht.translate', 'cfp.hotkeys',
-  'growlNotifications', 'uuid', 'angular-md5'
+var taskplannerApp = angular.module("taskplanner", ['ui.router', 'ngMaterial', 'ngCookies', 'ngSanitize', 'pascalprecht.translate', 'cfp.hotkeys',
+  'growlNotifications', 'uuid', 'angular-md5', 'monospaced.elastic'
 ]);
 
 /**
  * Global application configuration
  */
-taskplannerApp.config(['$stateProvider', '$urlRouterProvider', '$translateProvider', '$httpProvider',
-  function($stateProvider, $urlRouterProvider, $translateProvider, $httpProvider) {
+taskplannerApp.config(['$stateProvider', '$urlRouterProvider', '$translateProvider', '$httpProvider', '$mdThemingProvider',
+  function($stateProvider, $urlRouterProvider, $translateProvider, $httpProvider, $mdThemingProvider) {
 
     /** ************************************ */
     /** ***** Disable request caching ****** */
@@ -119,5 +119,30 @@ taskplannerApp.config(['$stateProvider', '$urlRouterProvider', '$translateProvid
 
     // Default state (Home)
     $urlRouterProvider.otherwise('/');
+
+    $mdThemingProvider.definePalette('amazingPaletteName', {
+      '50': '1d61a6',
+      '100': '1d61a6',
+      '200': '1d61a6',
+      '300': '1d61a6',
+      '400': '1d61a6',
+      '500': '1d61a6',
+      '600': '1d61a6',
+      '700': '1d61a6',
+      '800': '1d61a6',
+      '900': '1d61a6',
+      'A100': '1d61a6',
+      'A200': '1d61a6',
+      'A400': '1d61a6',
+      'A700': '1d61a6',
+      'contrastDefaultColor': 'light', // whether, by default, text (contrast)
+      // on this palette should be dark or light
+      'contrastDarkColors': ['50', '100', //hues which contrast should be 'dark' by default
+        '200', '300', '400', 'A100'
+      ],
+      'contrastLightColors': undefined // could also specify this if default was 'dark'
+    });
+    $mdThemingProvider.theme('default')
+      .primaryPalette('amazingPaletteName');
   }
 ]);

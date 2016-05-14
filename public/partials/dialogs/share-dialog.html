@@ -1,0 +1,17 @@
+<md-dialog style="padding: 1em;">
+  <span style="margin-bottom: 1em; font-weight: bold;">{{'CONTENT.SHARE_MODE' | translate}}:</span>
+  <md-radio-group ng-model="sdc.taskList.shareMode">
+    <md-radio-button value="r" class="md-primary">Read</md-radio-button>
+    <md-radio-button value="w" class="md-primary">Write</md-radio-button>
+    <md-radio-button value="n" class="md-primary">Don't share</md-radio-button>
+  </md-radio-group>
+
+  <md-dialog-actions layout="row">
+    <md-button ng-click="sdc.cancel()">
+      {{'GLOBAL.CANCEL' | translate}}
+    </md-button>
+    <md-button ng-click="sdc.save()" style="margin-right:20px;">
+      {{'GLOBAL.OK' | translate}}
+    </md-button>
+  </md-dialog-actions>
+</md-dialog>

@@ -92,6 +92,7 @@
           $set: {
             title: tl.title,
             tasks: tl.tasks,
+            shareMode: tl.shareMode,
             updated_at: new Date()
           }
         }, function(err) {

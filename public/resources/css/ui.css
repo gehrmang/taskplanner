@@ -30,15 +30,18 @@
 /******************************/
 
 * {
-	-webkit-box-sizing: border-box;
 	/* Safari/Chrome, other WebKit */
-	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
 	/* Firefox, other Gecko */
-	box-sizing: border-box;
+	-moz-box-sizing: border-box;
 	/* Opera/IE 8+ */
+	box-sizing: border-box;
+	outline: 0;
+}
+
+body {
 	font-size: 12px;
 	color: #353434;
-	outline: 0;
 }
 
 .clearfix:before,
@@ -649,12 +652,13 @@ input[type="radio"] {
 button,
 input[type="submit"],
 input[type="reset"],
-input[type="button"] {
+input[type="button"],
+.md-button {
 	height: 20px;
 	background-color: #1d61a6;
 	border: 1px solid #1d61a6;
 	border-radius: 3px;
-	color: #FFF;
+	color: #FFF !important;
 	margin-bottom: 0.5em;
 	width: 80px;
 	cursor: pointer;
@@ -663,12 +667,13 @@ input[type="button"] {
 button:disabled,
 input[type="submit"]:disabled,
 input[type="reset"]:disabled,
-input[type="button"]:disabled {
+input[type="button"]:disabled,
+.md-button:disabled {
 	height: 20px;
 	background-color: #9f463d;
 	border: 1px solid #9f463d;
 	border-radius: 3px;
-	color: #FFF;
+	color: #FFF !important;
 	margin-bottom: 0.5em;
 	width: 80px;
 }

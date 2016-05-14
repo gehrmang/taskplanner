@@ -130,6 +130,10 @@ table tr td.centerColumn {
   text-align: center;
 }
 
+.clickable {
+  cursor: pointer;
+}
+
 #logincontainer {
   float: right;
   line-height: 80px;
@@ -163,6 +167,7 @@ table tr td.centerColumn {
 div.title {
   width: 100%;
   border-bottom: 1px solid #1d61a6;
+  padding-bottom: 2px;
 }
 
 li.task-list-item {
@@ -201,4 +206,39 @@ li.task-list-item:hover {
 li.task-list-item:hover .task-list-remove,
 li.task-list-item:hover .task-list-rename {
   visibility: visible;
+}
+
+.tasks li {
+  border-bottom: 1px dotted #E0E0E0;
+  padding-right: 5px;
+}
+
+.tasks li:hover {
+  background-color: #E0E0E0;
+}
+
+.tasks li table tr {
+  border: 0 none;
+}
+
+.tasks li table tr td {
+  padding: 0;
+}
+
+.tasks li table tr:nth-child(2) {
+  font-size: 10px;
+}
+
+.tasks .taskaction {
+  width: 80px;
+  text-align: right;
+  text-transform: lowercase;
+}
+
+.tasks li.dueToday {
+  background: repeating-linear-gradient( -45deg, #F2F5A9, #F2F5A9 10px, #F5F6CE 10px, #F5F6CE 20px);
+}
+
+.tasks li.overdue {
+  background: repeating-linear-gradient( -45deg, #F5A9A9, #F5A9A9 10px, #F6CECE 10px, #F6CECE 20px);
 }
