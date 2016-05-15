@@ -8,7 +8,8 @@
   /** ********* Node modules ********* */
   /** ******************************** */
   var winston = require('winston');
-
+  var json2csv = require('json2csv');
+  var fs = require('fs');
 
   /** ******************************** */
   /** ******* MongoOSE Models ******** */
@@ -16,7 +17,7 @@
   var TaskList = require('../models/tasklist.model');
 
   /**
-   * User authentication controller.
+   * Task list controller.
    * 
    * @author Gerry Gehrmann
    * @since 0.0.1
@@ -38,7 +39,8 @@
       listShared: listShared,
       save: save,
       saveTasks: saveTasks,
-      remove: remove
+      remove: remove,
+      exportTasks: exportTasks
     };
 
     return service;
@@ -157,7 +159,7 @@
     function remove(req, res) {
       var taskListId = req.query['tl'];
 
-      TaskList.find({
+      TaskList.findOne({
         _id: taskListId
       }).remove(function(err) {
         if (err) {
@@ -167,6 +169,50 @@
         }
 
         res.status(200).send();
+      });
+    }
+
+    /**
+     * Export all tasks of the given task list to CSV.
+     * 
+     * @memberOf TaskListController#
+     * @param {Object} req - The HTTP request
+     * @param {Object} res - The HTTP response
+     */
+    function exportTasks(req, res) {
+      var taskListId = req.query['tl'];
+
+      TaskList.findOne({
+        _id: taskListId
+      }, function(err, result) {
+        if (err) {
+          winston.error(err);
+          res.status(500).send(err);
+          return;
+        }
+
+        if (result) {
+          json2csv({
+            data: result.tasks,
+            fields: ['uuid', 'title', 'dueDate', 'done'],
+            del: ';'
+          }, function(err, csv) {
+            if (err) {
+              winston.error(err);
+              res.status(500).send(err);
+              return;
+            }
+            fs.writeFile('file.csv', csv, function(err) {
+              if (err) {
+                winston.error(err);
+                res.status(500).send(err);
+                return;
+              }
+              
+              res.download('file.csv');
+            });
+          });
+        }
       });
     }
   };

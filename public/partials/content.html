@@ -1,7 +1,10 @@
 <div class="col25">
   <div class="framed-container">
-    <div class="title">{{'CONTENT.MY_TASK_LISTS' | translate}}</div>
-    <ul class="">
+    <div class="title clearfix">
+      <div class="floatleft">{{'CONTENT.MY_TASK_LISTS' | translate}}</div>
+      <div class="floatright clickable" ng-click="vm.addTaskList()" style="font-weight: normal;">{{'CONTENT.ADD_TASK_LIST' | translate}}</div>
+    </div>
+    <ul>
       <li class="task-list-item" ng-repeat="list in vm.myTaskLists | orderBy:'title'" ng-click="vm.selectTaskList(list)">
         <div class="clearfix">
           <div class="task-list-title" ng-hide="list.rename">{{list.title}}</div>
@@ -12,15 +15,13 @@
           <div class="task-list-rename" ng-click="vm.renameTaskList(list)"><span class="icon10 icon10-pen"></span></div>
         </div>
       </li>
-      <li class="task-list-item" ng-click="vm.addTaskList()">
-        <div class="clearfix">
-          <div class="task-list-title">{{'CONTENT.ADD_TASK_LIST' | translate}}</div>
-        </div>
-      </li>
     </ul>
   </div>
   <div class="framed-container">
-    <div class="title">{{'CONTENT.SHARED_TASK_LISTS' | translate}}</div>
+    <div class="title clearfix">
+      <div class="floatleft">{{'CONTENT.SHARED_TASK_LISTS' | translate}}</div>
+      <div class="floatright clickable" ng-click="vm.addSharedTaskList()" style="font-weight: normal;">{{'CONTENT.ADD_TASK_LIST' | translate}}</div>
+    </div>
   </div>
 </div>
 

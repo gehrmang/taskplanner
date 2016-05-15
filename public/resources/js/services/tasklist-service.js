@@ -13,7 +13,7 @@
    */
   angular.module('taskplanner').factory('TaskListService', TaskListService);
 
-  TaskListService.$inject = ['$rootScope', '$q', '$http', '$translate'];
+  TaskListService.$inject = ['$rootScope', '$q', '$http', '$window', '$translate', 'AuthService'];
 
   /**
    * Task List Service implementation
@@ -23,9 +23,11 @@
    * @param {Object} $rootScope - The application wide root scope
    * @param {Object} $q - The $q service
    * @param {Object} $http - The $http service
+   * @param {Object} $window - The $window service
    * @param {Object} $translate - The $translate service
+   * @param {Object} AuthService - The authentication service
    */
-  function TaskListService($rootScope, $q, $http, $translate) {
+  function TaskListService($rootScope, $q, $http, $window, $translate, AuthService) {
 
     /**
      * The base REST URL.
@@ -39,7 +41,7 @@
     /**
      * The service interface
      * 
-     * @fieldOf AuthService#
+     * @fieldOf TaskListService#
      * @private
      * @interface
      */
@@ -47,7 +49,8 @@
       list: list,
       save: save,
       saveTasks: saveTasks,
-      remove: remove
+      remove: remove,
+      exportTasks: exportTasks
     };
 
     return service;
@@ -133,6 +136,16 @@
       });
 
       return deferred.promise;
+    }
+
+    /**
+     * Export all tasks of the given task list.
+     * 
+     * @memberOF TaskListService#
+     * @param {Object} taskList - The taskList to be exported
+     */
+    function exportTasks(taskList) {
+        $window.open(REST_BASE_PATH + '/export?tl=' + taskList._id + '&t=' + AuthService.getToken(true));
     }
   }
 

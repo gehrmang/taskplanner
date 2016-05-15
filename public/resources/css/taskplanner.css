@@ -242,3 +242,12 @@ li.task-list-item:hover .task-list-rename {
 .tasks li.overdue {
   background: repeating-linear-gradient( -45deg, #F5A9A9, #F5A9A9 10px, #F6CECE 10px, #F6CECE 20px);
 }
+
+.profile-image-container {
+	width: 150px;
+	height: 150px;
+	border: 1px solid #1d61a6;
+	border-radius: 75px;
+	overflow: hidden;
+	margin: 0 auto;
+}

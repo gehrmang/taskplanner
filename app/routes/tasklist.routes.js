@@ -29,6 +29,8 @@
   /** ******************************** */
   // List all available task list of the current user
   router.get('/', authController.checkAuth, taskListController.list);
+  // Export the tasks of a specific task list
+  router.get('/export', authController.checkAuth, taskListController.exportTasks);
   // Save a given task list
   router.post('/', authController.checkAuth, taskListController.save);
   // Save the tasks of a specific task list

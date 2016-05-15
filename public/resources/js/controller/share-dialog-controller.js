@@ -16,7 +16,7 @@
   ShareDialogController.$inject = ['$mdDialog'];
 
   /**
-   * The main controller of the content view.
+   * The main controller of the share task list dialog.
    * 
    * @class
    * @name ShareDialogController

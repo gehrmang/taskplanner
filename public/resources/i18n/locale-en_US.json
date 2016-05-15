@@ -19,16 +19,17 @@
         "REMOVE": "Remove",
         "SAVE": "Save",
         "CANCEL": "Cancel",
-        "OK" : "Ok",
+        "OK": "Ok",
+        "RESET": "Reset",
         "SHARE": "Share",
-        "EXPORT" : "Export"
+        "EXPORT": "Export"
     },
     "CONTENT": {
         "MY_TASK_LISTS": "My task lists",
         "SHARED_TASK_LISTS": "Shared task lists",
         "MESSAGES": "Messages",
         "TASK_LIST_DEFAULT_TITLE": "New task list",
-        "ADD_TASK_LIST": "Add new",
+        "ADD_TASK_LIST": "Add",
         "NO_TASK_LIST_SELECTED": "No task list selected",
         "CONFIRM_REMOVE_TASK_LIST": "Are you sure you want to remove this task list?",
         "SHARE_MODE": "Share mode",
@@ -40,5 +41,36 @@
             "DONE": "Done",
             "CONFIRM_REMOVE_TASK": "Are you sure you want to remove this task?"
         }
+    },
+    "GLOBAL_ERROR": {
+        "403": "The access to the requested resource has been denied.",
+        "403_TITLE": "Access denied",
+        "404": "The requested resource could not be found.",
+        "404_TITLE": "Resource not found",
+        "500": "An internal server error occured. Please report this to your system administrator.",
+        "500_TITLE": "Internal Server Error",
+        "INVALID_EMAIL_FORMAT": "Invalid email format"
+    },
+    "PROFILE": {
+        "USERNAME": "Username",
+        "FIRSTNAME": "First name",
+        "NAME": "Last name",
+        "EMAIL": "Email",
+        "LANGUAGE": "Language",
+        "NAME_REQUIRED": "Name is required",
+        "FIRSTNAME_REQUIRED": "First name is required",
+        "CHANGE_PASSWORD": "Change password",
+        "OLD_PASSWORD": "Old password",
+        "NEW_PASSWORD": "New password",
+        "NEW_PW_REPEAT": "New password (repeat)",
+        "OLDPW_REQUIRED": "Old password required",
+        "NEWPW_REQUIRED": "New password required",
+        "NEWPW2_REQUIRED": "Repeated password required",
+        "NEWPW_DONT_MATCH": "New passwords do not match"
+    },
+    "LANGUAGES": {
+        "en_US": "English (US)",
+        "en_GB": "English (GB)",
+        "de_DE": "Deutsch"
     }
 }

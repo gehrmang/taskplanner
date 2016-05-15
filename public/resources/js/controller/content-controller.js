@@ -239,6 +239,23 @@
         return;
       }
 
+      if (!vm.renamingTaskList._id) {
+        var index = -1;
+        for (var i = 0; i < vm.myTaskLists.length; i++) {
+          if (!vm.myTaskLists[i]._id) {
+            index = i;
+            break;
+          }
+        }
+
+        if (index >= 0) {
+          vm.myTaskLists.splice(index, 1);
+        }
+        
+        vm.renamingTaskList = undefined;
+        return;
+      }
+
       vm.renamingTaskList.rename = false;
       vm.renamingTaskList.title = vm.renamingTaskList.oriTitle;
       delete vm.renamingTaskList.oriTitle;
@@ -303,7 +320,7 @@
      * @memberOf ContentController#
      */
     function exportTaskList() {
-
+      TaskListService.exportTasks(vm.taskList);
     }
 
     /**

@@ -1,5 +1,5 @@
 /* global angular */
-var taskplannerApp = angular.module("taskplanner", ['ui.router', 'ngMaterial', 'ngCookies', 'ngSanitize', 'pascalprecht.translate', 'cfp.hotkeys',
+var taskplannerApp = angular.module("taskplanner", ['ui.router', 'ngMaterial', 'ngMessages', 'ngCookies', 'ngSanitize', 'pascalprecht.translate', 'cfp.hotkeys',
   'growlNotifications', 'uuid', 'angular-md5', 'monospaced.elastic'
 ]);
 
@@ -81,7 +81,8 @@ taskplannerApp.config(['$stateProvider', '$urlRouterProvider', '$translateProvid
       controllerAs: 'vm',
       resolve: {
         user: resolveUser
-      }
+      },
+      auth: {}
     }).state('login', {
       // Login
       url: '/login',
@@ -94,9 +95,12 @@ taskplannerApp.config(['$stateProvider', '$urlRouterProvider', '$translateProvid
     }).state('profile', {
       url: '/profile',
       templateUrl: 'partials/profile.html',
+      controller: 'ProfileController',
+      controllerAs: 'vm',
       resolve: {
         user: resolveUser
-      }
+      },
+      auth: {}
     }).state('500', {
       url: '/error/500',
       templateUrl: 'partials/500.html',
@@ -146,3 +150,20 @@ taskplannerApp.config(['$stateProvider', '$urlRouterProvider', '$translateProvid
       .primaryPalette('amazingPaletteName');
   }
 ]);
+
+taskplannerApp.run(function($state, $rootScope, AuthService) {
+  $rootScope.$state = $state;
+
+  $rootScope.$on('$stateChangeSuccess', function(ev, to, toParams, from, fromParams) {
+    if (!to.auth) {
+      return;
+    }
+
+    if (AuthService.getUser()) {
+      return;
+    }
+
+    ev.preventDefault();
+    $state.transitionTo('login');
+  });
+});
