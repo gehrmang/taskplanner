@@ -13,7 +13,7 @@
    */
   angular.module("taskplanner").controller("ContentController", ContentController);
 
-  ContentController.$inject = ['$rootScope', '$scope', '$mdDialog', '$mdMedia', '$translate', 'hotkeys', 'uuid4', 'AuthService', 'TaskListService'];
+  ContentController.$inject = ['$rootScope', '$scope', '$mdDialog', '$mdMedia', '$translate', 'hotkeys', 'uuid4', 'AuthService', 'TaskListService', 'GrowlService'];
 
   /**
    * The main controller of the content view.
@@ -29,8 +29,9 @@
    * @param {Object} uuid4 - The uuid4 service
    * @param {Object} AuthService - The authentication service
    * @param {Object} TaskListService - The task list service
+   * @param {Object} GrowlService - The growl notification service
    */
-  function ContentController($rootScope, $scope, $mdDialog, $mdMedia, $translate, hotkeys, uuid4, AuthService, TaskListService) {
+  function ContentController($rootScope, $scope, $mdDialog, $mdMedia, $translate, hotkeys, uuid4, AuthService, TaskListService, GrowlService) {
 
     /**
      * The view model of this controller
@@ -224,9 +225,13 @@
       vm.renamingTaskList.rename = false;
       delete vm.renamingTaskList.oriTitle;
       TaskListService.save(vm.renamingTaskList).then(function(result) {
-        vm.renamingTaskList._id = result._id;
-        vm.renamingTaskList = undefined;
-      });
+          vm.renamingTaskList._id = result._id;
+          vm.renamingTaskList = undefined;
+          GrowlService.success($translate.instant('CONTENT.SAVE_SUCCESS'));
+        },
+        function() {
+          GrowlService.error($translate.instant('CONTENT.SAVE_ERROR'));
+        });
     }
 
     /**
@@ -251,7 +256,7 @@
         if (index >= 0) {
           vm.myTaskLists.splice(index, 1);
         }
-        
+
         vm.renamingTaskList = undefined;
         return;
       }
@@ -279,7 +284,12 @@
 
       if (index >= 0) {
         vm.myTaskLists.splice(index, 1);
-        TaskListService.remove(taskList);
+        TaskListService.remove(taskList).then(function() {
+            GrowlService.success($translate.instant('CONTENT.REMOVE_SUCCESS'));
+          },
+          function() {
+            GrowlService.error($translate.instant('CONTENT.REMOVE_ERROR'));
+          });
       }
     }
 
@@ -304,7 +314,12 @@
           }
         })
         .then(function() {
-          TaskListService.save(vm.taskList);
+          TaskListService.save(vm.taskList).then(function() {
+              GrowlService.success($translate.instant('CONTENT.SAVE_SUCCESS'));
+            },
+            function() {
+              GrowlService.error($translate.instant('CONTENT.SAVE_ERROR'));
+            });
         }, function() {});
 
       $scope.$watch(function() {
@@ -398,8 +413,12 @@
       delete task.backupDueDate;
 
       TaskListService.saveTasks(vm.taskList).then(function() {
-        delete task.isNew;
-      });
+          delete task.isNew;
+          GrowlService.success($translate.instant('CONTENT.TASK.SAVE_SUCCESS'));
+        },
+        function() {
+          GrowlService.error($translate.instant('CONTENT.TASK.SAVE_ERROR'));
+        });
     }
 
     /**
@@ -415,7 +434,12 @@
 
       if (index >= 0) {
         vm.taskList.tasks.splice(index, 1);
-        TaskListService.saveTasks(vm.taskList);
+        TaskListService.saveTasks(vm.taskList).then(function() {
+            GrowlService.success($translate.instant('CONTENT.TASK.REMOVE_SUCCESS'));
+          },
+          function() {
+            GrowlService.error($translate.instant('CONTENT.TASK.REMOVE_ERROR'));
+          });
       }
     }
 

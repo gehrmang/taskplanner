@@ -67,22 +67,27 @@
 
       return deferred.promise;
     }
-    
-        /**
+
+    /**
      * Update the password of the given user.
      * 
      * @memberOf UserService#
      * @param {Object} user - The user to be modified
-     * @param {string} oldPassword - The old password
      * @param {string} newPassword - The new password
      */
-    function changePassword(user, oldPassword, newPassword) {
+    function changePassword(user, newPassword) {
+      var deferred = $q.defer();
+
       $http.post(REST_BASE_PATH + '/chpass', {
-        user : user,
-        oldPassword : oldPassword,
-        password : newPassword
-      }).success(function(data) {
+        user: user,
+        password: newPassword
+      }).then(function(response) {
+        deferred.resolve(response.data);
+      }, function(response) {
+        deferred.reject(response);
       });
+
+      return deferred.promise;
     }
   }
 

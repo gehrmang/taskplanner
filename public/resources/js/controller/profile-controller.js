@@ -13,13 +13,14 @@
    */
   angular.module("taskplanner").controller("ProfileController", ProfileController);
 
-  ProfileController.$inject = ['$scope', '$mdDialog', '$mdMedia', '$translate', 'GravatarService', 'AuthService', 'UserService'];
+  ProfileController.$inject = ['$rootScope', '$scope', '$mdDialog', '$mdMedia', '$translate', 'GravatarService', 'AuthService', 'UserService', 'GrowlService'];
 
   /**
    * The main controller for the profile view.
    * 
    * @class
    * @name ProfileController
+   * @param {Object} $rootScope - The global root scope
    * @param {Object} $scope - The scope of this controller
    * @param {Object} $mdDialog - The Angular Material dialog service
    * @param {Object} $mdMedia - The Angular Material media service
@@ -27,8 +28,9 @@
    * @param {Object} GravatarService - The md5 hashing service
    * @param {Object} AuthService - The authentication service
    * @param {Object} UserService - The user service
+   * @param {Object} GrowlService - The growl notification service
    */
-  function ProfileController($scope, $mdDialog, $mdMedia, $translate, GravatarService, AuthService, UserService) {
+  function ProfileController($rootScope, $scope, $mdDialog, $mdMedia, $translate, GravatarService, AuthService, UserService, GrowlService) {
 
 
     /**
@@ -90,6 +92,7 @@
         AuthService.getUser().email = vm.currentUser.email;
         AuthService.getUser().language = vm.currentUser.language;
         $translate.use(vm.currentUser.language);
+        GrowlService.success($translate.instant('PROFILE.SAVE_SUCCESS'));
       });
     }
 
@@ -119,8 +122,10 @@
           fullscreen: useFullScreen,
           bindToController: true
         })
-        .then(function(oldPassword, newPassword) {
-          UserService.changePassword(vm.currentUser, oldPassword, newPassword);
+        .then(function(newPassword) {
+          UserService.changePassword(vm.currentUser, newPassword).then(function() {
+            GrowlService.success($translate.instant('PROFILE.PASSWORD_CHANGE_SUCCESS'));
+          });
         });
 
       $scope.$watch(function() {

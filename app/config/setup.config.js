@@ -75,7 +75,7 @@
         "firstname": "Admin",
         "language": "en_US"
       });
-      newUser.setPassword('12345', function() {
+      newUser.setPassword('admin', function() {
         // save the user
         newUser.save(function(err) {
           if (err) {

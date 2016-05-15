@@ -15,7 +15,6 @@
   var mongoose = require('mongoose');
   var Schema = mongoose.Schema;
   var passportLocalMongoose = require('passport-local-mongoose');
-  var bcrypt = require('bcrypt');
 
   /**
    * The user schema. Properties like username and password will be added by
@@ -30,6 +29,10 @@
    * @property {Date} updated_at - The last update date
    */
   var userSchema = new Schema({
+    password: {
+      type: String,
+      required: true
+    },
     email: String,
     name: {
       type: String,
@@ -71,16 +74,9 @@
 
   // Add the passport plugin to the model
   userSchema.plugin(passportLocalMongoose, {
-    usernameField: 'username'
+    usernameField: 'username',
+    hashField: 'password'
   });
-
-  // Password verification
-  userSchema.methods.comparePassword = function(candidatePassword, cb) {
-    bcrypt.compare(candidatePassword, this.hash, function(err, isMatch) {
-      if (err) return cb(err);
-      cb(null, isMatch);
-    });
-  };
 
   // Create the final MongoOSE model
   var User = mongoose.model('User', userSchema);

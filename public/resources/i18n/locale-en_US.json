@@ -34,12 +34,20 @@
         "CONFIRM_REMOVE_TASK_LIST": "Are you sure you want to remove this task list?",
         "SHARE_MODE": "Share mode",
         "ADD_TASK": "Add task",
+        "SAVE_SUCCESS": "Task list saved",
+        "SAVE_ERROR": "An error occured while trying to save the task list",
+        "REMOVE_SUCCESS": "Task list removed",
+        "REMOVE_ERROR": "An error occured while removing the task list",
         "TASK": {
             "TITLE": "Task",
             "DESCRIPTION": "Description",
             "DUEDATE": "Due-date",
             "DONE": "Done",
-            "CONFIRM_REMOVE_TASK": "Are you sure you want to remove this task?"
+            "CONFIRM_REMOVE_TASK": "Are you sure you want to remove this task?",
+            "SAVE_SUCCESS": "Task saved",
+            "SAVE_ERROR": "An error occured while trying to save the task",
+            "REMOVE_SUCCESS": "Task removed",
+            "REMOVE_ERROR": "An error occured while removing the task"
         }
     },
     "GLOBAL_ERROR": {
@@ -66,7 +74,9 @@
         "OLDPW_REQUIRED": "Old password required",
         "NEWPW_REQUIRED": "New password required",
         "NEWPW2_REQUIRED": "Repeated password required",
-        "NEWPW_DONT_MATCH": "New passwords do not match"
+        "NEWPW_DONT_MATCH": "New passwords do not match",
+        "SAVE_SUCCESS": "Profile saved",
+        "PASSWORD_CHANGE_SUCCESS": "Password changed"
     },
     "LANGUAGES": {
         "en_US": "English (US)",

@@ -172,3 +172,14 @@
 {"level":"info","message":"   Taskplanner listening at http://:::8080","timestamp":"2016-05-15T17:05:57.146Z"}
 {"level":"info","message":"   Connected to MongoDB","timestamp":"2016-05-15T17:05:57.167Z"}
 {"message":"  ","stack":"Error: data and hash arguments required\n    at /home/ubuntu/workspace/node_modules/bcrypt/bcrypt.js:144:16\n    at nextTickCallbackWith0Args (node.js:420:9)\n    at process._tickCallback (node.js:349:13)","level":"error","timestamp":"2016-05-15T17:06:20.026Z"}
+{"level":"info","message":"   Passport initialized","timestamp":"2016-05-15T19:36:01.286Z"}
+{"level":"info","message":"   Taskplanner listening at http://:::8080","timestamp":"2016-05-15T19:36:01.454Z"}
+{"level":"info","message":"   Connected to MongoDB","timestamp":"2016-05-15T19:36:01.476Z"}
+{"level":"info","message":"   Passport initialized","timestamp":"2016-05-15T19:37:08.347Z"}
+{"level":"info","message":"   Taskplanner listening at http://:::8080","timestamp":"2016-05-15T19:37:08.489Z"}
+{"level":"info","message":"   Connected to MongoDB","timestamp":"2016-05-15T19:37:08.533Z"}
+{"message":"  ","stack":"Error: data and hash arguments required\n    at /home/ubuntu/workspace/node_modules/bcrypt/bcrypt.js:144:16\n    at nextTickCallbackWith0Args (node.js:420:9)\n    at process._tickCallback (node.js:349:13)","level":"error","timestamp":"2016-05-15T19:37:42.602Z"}
+{"message":"  ","stack":"Error: data and hash arguments required\n    at /home/ubuntu/workspace/node_modules/bcrypt/bcrypt.js:144:16\n    at nextTickCallbackWith0Args (node.js:420:9)\n    at process._tickCallback (node.js:349:13)","level":"error","timestamp":"2016-05-15T19:38:06.574Z"}
+{"level":"info","message":"   Passport initialized","timestamp":"2016-05-15T19:42:39.052Z"}
+{"level":"info","message":"   Taskplanner listening at http://:::8080","timestamp":"2016-05-15T19:42:39.196Z"}
+{"level":"info","message":"   Connected to MongoDB","timestamp":"2016-05-15T19:42:39.222Z"}

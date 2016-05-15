@@ -91,7 +91,6 @@
      */
     function changePassword(req, res) {
       var user = req.body.user;
-      var oldPass = req.body.oldPassword;
       var newPass = req.body.password;
 
       User.findOne({
@@ -103,27 +102,15 @@
           return;
         }
 
-        result.comparePassword(oldPass, function(err, isMatch) {
-          if (err) {
-            winston.error(err);
-            res.status(500).send(err);
-            return;
-          }
+        result.setPassword(newPass, function() {
+          result.save(function(err) {
+            if (err) {
+              winston.error(err);
+              res.status(500).send(err);
+              return;
+            }
 
-          if (!isMatch) {
-            res.status(500).send();
-          }
-
-          result.setPassword(newPass, function() {
-            result.save(function(err) {
-              if (err) {
-                winston.error(err);
-                res.status(500).send(err);
-                return;
-              }
-
-              res.sendStatus(200);
-            });
+            res.sendStatus(200);
           });
         });
       });
