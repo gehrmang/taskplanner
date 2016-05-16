@@ -6,7 +6,8 @@
         "LOGOUT": "Logout",
         "PASSWORD": "Password",
         "PROFILE": "Profile",
-        "USERNAME": "Username"
+        "USERNAME": "Username",
+        "ADD_USER": "Add user"
     },
     "GLOBAL": {
         "TITLE": "Taskplanner",
