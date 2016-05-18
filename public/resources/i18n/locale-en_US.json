@@ -7,7 +7,7 @@
         "PASSWORD": "Password",
         "PROFILE": "Profile",
         "USERNAME": "Username",
-        "ADD_USER": "Add user"
+        "USERS": "Users"
     },
     "GLOBAL": {
         "TITLE": "Taskplanner",
@@ -83,5 +83,11 @@
         "en_US": "English (US)",
         "en_GB": "English (GB)",
         "de_DE": "Deutsch"
+    },
+    "USERS": {
+        "USERNAME": "Username",
+        "FIRSTNAME": "First name",
+        "NAME": "Name",
+        "ADD_USER": "Add user"
     }
 }

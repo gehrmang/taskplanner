@@ -31,7 +31,7 @@
     /**
      * The view model of this controller
      * 
-     * @fieldOf ContentController
+     * @fieldOf HeaderController
      * @type Object
      */
     var vm = this;
@@ -41,6 +41,7 @@
     /** ************************************ */
     vm.logout = logout;
     vm.getGravatarUrl = getGravatarUrl;
+    vm.isAdminUser = isAdminUser;
 
     /** ************************************ */
     /** ***** Controller implementation **** */
@@ -65,6 +66,15 @@
       return GravatarService.getUrl(30);
     }
 
+    /**
+     * Check if the currently logged in user is the admin user.
+     * 
+     * @memberOf HeaderController#
+     * @returns {boolean} true if the current user is the admin user, false otherwise
+     */
+    function isAdminUser() {
+      return AuthService.isAdminUser();
+    }
   }
 
 })();

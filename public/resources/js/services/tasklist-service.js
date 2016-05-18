@@ -59,6 +59,7 @@
      * List all task lists of the current user.
      * 
      * @memberOf TaskListService#
+     * @returns A promise resolving to the HTTP response data
      */
     function list() {
       var deferred = $q.defer();
@@ -77,6 +78,7 @@
      * 
      * @memberOf TaskListService#
      * @param {Object} taskList - The taskList to be saved
+     * @returns A promise resolving to the HTTP response data
      */
     function save(taskList) {
       var deferred = $q.defer();
@@ -97,6 +99,7 @@
      * 
      * @memberOf TaskListService#
      * @param {Object} taskList - The taskList to be saved
+     * @returns A promise resolving to the HTTP response data
      */
     function saveTasks(taskList) {
       var deferred = $q.defer();
@@ -119,6 +122,7 @@
      * 
      * @memberOf TaskListService#
      * @param {Object} taskList - The taskList to be removed
+     * @returns A promise resolving to the HTTP response data
      */
     function remove(taskList) {
       var deferred = $q.defer();

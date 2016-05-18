@@ -56,7 +56,8 @@
       logout: logout,
       loadUser: loadUser,
       getUser: getUser,
-      getToken: getToken
+      getToken: getToken,
+      isAdminUser: isAdminUser
     };
 
     return service;
@@ -169,6 +170,16 @@
       }
 
       return undefined;
+    }
+    
+    /**
+     * Check if the current user is the admin user.
+     * 
+     * @memberOf AuthService
+     * @returns {boolean} true if the current user is the admin user, false otherwise
+     */
+    function isAdminUser() {
+      return authenticatedUser && authenticatedUser.username === 'admin';
     }
   }
 

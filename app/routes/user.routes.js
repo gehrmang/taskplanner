@@ -27,6 +27,8 @@
   /** ******************************** */
   /** ****** Route definitions ******* */
   /** ******************************** */
+  // Get all available users
+  router.get('/list', authController.checkAuth, userController.list);
   // Save a given user
   router.post('/', authController.checkAuth, userController.save);
   // Change the password of a given user

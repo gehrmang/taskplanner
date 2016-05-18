@@ -101,6 +101,17 @@ taskplannerApp.config(['$stateProvider', '$urlRouterProvider', '$translateProvid
         user: resolveUser
       },
       auth: {}
+    }).state('users', {
+      url: '/users',
+      templateUrl: 'partials/users.html',
+      controller: 'UserController',
+      controllerAs: 'vm',
+      resolve: {
+        user: resolveUser
+      },
+      auth: {
+        admin: true
+      }
     }).state('500', {
       url: '/error/500',
       templateUrl: 'partials/500.html',
@@ -156,6 +167,10 @@ taskplannerApp.run(function($state, $rootScope, AuthService) {
 
   $rootScope.$on('$stateChangeSuccess', function(ev, to, toParams, from, fromParams) {
     if (!to.auth) {
+      return;
+    }
+
+    if (to.auth.admin && AuthService.isAdminUser()) {
       return;
     }
 

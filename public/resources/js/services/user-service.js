@@ -42,6 +42,7 @@
      * @interface
      */
     var service = {
+      list: list,
       saveUser: saveUser,
       changePassword: changePassword
     };
@@ -49,10 +50,29 @@
     return service;
 
     /**
+     * List all available users.
+     * 
+     * @memberOf UserService#
+     * @returns A promise resolving to the HTTP response data
+     */
+    function list() {
+      var deferred = $q.defer();
+      
+      $http.get(REST_BASE_PATH + '/list').then(function(response) {
+        deferred.resolve(response.data);
+      }, function(response) {
+        deferred.reject(response);
+      });
+      
+      return deferred.promise;
+    }
+
+    /**
      * Save the given user.
      * 
      * @memberOf UserService#
      * @param {Object} user - The user to be saved
+     * @returns A promise resolving to the HTTP response data
      */
     function saveUser(user) {
       var deferred = $q.defer();
@@ -74,6 +94,7 @@
      * @memberOf UserService#
      * @param {Object} user - The user to be modified
      * @param {string} newPassword - The new password
+     * @returns A promise resolving to the HTTP response data
      */
     function changePassword(user, newPassword) {
       var deferred = $q.defer();

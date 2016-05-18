@@ -33,11 +33,31 @@
      * @interface
      */
     var service = {
+      list: list,
       save: save,
       changePassword: changePassword
     };
 
     return service;
+
+    /**
+     * List all available users.
+     * 
+     * @memberOf UserController#
+     * @param {Object} req - The HTTP request
+     * @param {Object} res - The HTTP response
+     */
+    function list(req, res) {
+      User.find({}, function(err, result) {
+        if (err) {
+          winston.error(err);
+          res.status(500).send(err);
+          return;
+        }
+
+        res.send(result);
+      });
+    }
 
     /**
      * Save a given user.

@@ -186,3 +186,9 @@
 {"level":"info","message":"   Passport initialized","timestamp":"2016-05-16T16:47:57.582Z"}
 {"level":"info","message":"   Taskplanner listening at http://:::8080","timestamp":"2016-05-16T16:47:57.938Z"}
 {"level":"info","message":"   Connected to MongoDB","timestamp":"2016-05-16T16:47:57.978Z"}
+{"level":"info","message":"   Passport initialized","timestamp":"2016-05-18T17:28:23.361Z"}
+{"level":"info","message":"   Taskplanner listening at http://:::8080","timestamp":"2016-05-18T17:28:24.009Z"}
+{"level":"info","message":"   Connected to MongoDB","timestamp":"2016-05-18T17:28:24.058Z"}
+{"level":"info","message":"   Passport initialized","timestamp":"2016-05-18T17:47:50.592Z"}
+{"level":"info","message":"   Taskplanner listening at http://:::8080","timestamp":"2016-05-18T17:47:50.754Z"}
+{"level":"info","message":"   Connected to MongoDB","timestamp":"2016-05-18T17:47:50.778Z"}
