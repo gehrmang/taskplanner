@@ -40,6 +40,7 @@
   <script type="text/javascript" src="resources/js/controller/profile-controller.js"></script>
   <script type="text/javascript" src="resources/js/controller/chpass-dialog-controller.js"></script>
   <script type="text/javascript" src="resources/js/controller/user-controller.js"></script>
+  <script type="text/javascript" src="resources/js/controller/user-edit-controller.js"></script>
   
   <script type="text/javascript" src="resources/js/services/auth-service.js"></script>
   <script type="text/javascript" src="resources/js/services/tasklist-service.js"></script>
@@ -79,7 +80,7 @@
           </a>
         </div>
         <div class="header-item" ng-if="vm.isAdminUser()">
-          <a ui-sref="users">
+          <a ui-sref="users.list">
             <span id="add-user-glyph" class="header-glyph">
               <img src="resources/img/shapes/add_user.png" style="margin-top: 2px; margin-left: 4px;"/>
             </span>

@@ -104,7 +104,27 @@ taskplannerApp.config(['$stateProvider', '$urlRouterProvider', '$translateProvid
     }).state('users', {
       url: '/users',
       templateUrl: 'partials/users.html',
+      resolve: {
+        user: resolveUser
+      },
+      auth: {
+        admin: true
+      }
+    }).state('users.list', {
+      url: '/list',
+      templateUrl: 'partials/userlist.html',
       controller: 'UserController',
+      controllerAs: 'vm',
+      resolve: {
+        user: resolveUser
+      },
+      auth: {
+        admin: true
+      }
+    }).state('users.edit', {
+      url: '/edit/:username',
+      templateUrl: 'partials/edituser.html',
+      controller: 'UserEditController',
       controllerAs: 'vm',
       resolve: {
         user: resolveUser

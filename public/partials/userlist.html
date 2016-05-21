@@ -1,0 +1,18 @@
+<table style="width: 100%">
+  <tr>
+    <th>{{'USERS.USERNAME' | translate}}</th>
+    <th>{{'USERS.FIRSTNAME' | translate}}</th>
+    <th>{{'USERS.NAME' | translate}}</th>
+    <th class="iconColumn"></th>
+    <th class="iconColumn"></th>
+  </tr>
+  <tr ng-repeat="user in vm.users | orderBy:username">
+    <td>{{user.username}}</td>
+    <td>{{user.firstname}}</td>
+    <td>{{user.name}}</td>
+    <td><span class="clickable icon icon-pen" ng-click="$state.go('users.edit', {username: user.username})"></span></td>
+    <td><span class="clickable icon icon-trash" ng-if="user.username != 'admin'" ng-click="vm.confirm($event, 'USERS.CONFIRM_REMOVE', user, vm.removeUser)"></span></td>
+  </tr>
+</table>
+
+<button style="margin-top: 2em;" ng-click="$state.go('users.edit')">{{'USERS.ADD_USER' | translate}}</button>

@@ -34,7 +34,9 @@
      */
     var service = {
       list: list,
+      getUser: getUser,
       save: save,
+      removeUser: removeUser,
       changePassword: changePassword
     };
 
@@ -49,6 +51,34 @@
      */
     function list(req, res) {
       User.find({}, function(err, result) {
+        if (err) {
+          winston.error(err);
+          res.status(500).send(err);
+          return;
+        }
+
+        res.send(result);
+      });
+    }
+
+    /**
+     * Get a user by its username.
+     * 
+     * @memberOf UserController#
+     * @param {Object} req - The HTTP request
+     * @param {Object} res - The HTTP response
+     */
+    function getUser(req, res) {
+      var username = req.query['u'];
+
+      if (!username) {
+        res.send();
+        return;
+      }
+
+      User.findOne({
+        username: username
+      }, function(err, result) {
         if (err) {
           winston.error(err);
           res.status(500).send(err);
@@ -87,19 +117,57 @@
             return;
           }
 
-          res.sendStatus(200);
-        });
-      } else {
-        new User(user).save(function(err, result) {
-          if (err) {
-            winston.error(err);
-            res.status(500).send(err);
+          if (user.newPassword) {
+            updatePassword(user._id, user.newPassword, function(err) {
+              if (err) {
+                winston.error(err);
+                res.status(500).send(err);
+                return;
+              }
+
+              res.sendStatus(200);
+            });
             return;
           }
 
-          res.send(result);
+          res.sendStatus(200);
+        });
+      } else {
+        var newUser = new User(user);
+        newUser.setPassword(user.newPassword, function() {
+          // save the user
+          newUser.save(function(err, result) {
+            if (err) {
+              winston.error(err);
+              res.status(500).send(err);
+              return;
+            }
+
+            res.send(result);
+          });
         });
       }
+    }
+
+    /**
+     * Remove a given user.
+     * 
+     * @memberOf UserController#
+     * @param {Object} req - The HTTP request
+     * @param {Object} res - The HTTP response
+     */
+    function removeUser(req, res) {
+      User.remove({
+        username: req.query['u']
+      }, function(err) {
+        if (err) {
+          winston.error(err);
+          res.status(500).send(err);
+          return;
+        }
+
+        res.sendStatus(200);
+      });
     }
 
     /**
@@ -113,27 +181,40 @@
       var user = req.body.user;
       var newPass = req.body.password;
 
-      User.findOne({
-        _id: user._id
-      }, function(err, result) {
+      updatePassword(user._id, newPass, function(err) {
         if (err) {
           winston.error(err);
           res.status(500).send(err);
           return;
         }
 
-        result.setPassword(newPass, function() {
-          result.save(function(err) {
-            if (err) {
-              winston.error(err);
-              res.status(500).send(err);
-              return;
-            }
+        res.sendStatus(200);
+      });
+    }
 
-            res.sendStatus(200);
-          });
+    /**
+     * Set the password of a specific user.
+     * 
+     * @memberOf UserController#
+     * @private
+     * @param {string} userId - The ID of a user
+     * @param {string} password - The new password to be set
+     * @callback callback
+     */
+    function updatePassword(userId, password, callback) {
+      User.findOne({
+        _id: userId
+      }, function(err, result) {
+        if (err) {
+          callback(err);
+          return;
+        }
+
+        result.setPassword(password, function() {
+          result.save(callback);
         });
       });
+
     }
   };
 })();

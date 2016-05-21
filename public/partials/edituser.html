@@ -1,0 +1,68 @@
+<form name="profileForm">
+  <md-input-container class="md-block">
+    <label>{{'PROFILE.USERNAME' | translate}}</label>
+    <input ng-model="vm.editUser.username" name="username" ng-required="vm.isNewUser" ng-disabled="!vm.isNewUser">
+    <div ng-messages="profileForm.username.$error">
+      <div ng-message="required">{{'PROFILE.USERNAME_REQUIRED' | translate}}</div>
+    </div>
+  </md-input-container>
+  <md-input-container class="md-block">
+    <label>{{'PROFILE.FIRSTNAME' | translate}}</label>
+    <input required name="firstname" ng-model="vm.editUser.firstname">
+    <div ng-messages="profileForm.firstname.$error">
+      <div ng-message="required">{{'PROFILE.FIRSTNAME_REQUIRED' | translate}}</div>
+    </div>
+  </md-input-container>
+  <md-input-container class="md-block">
+    <label>{{'PROFILE.NAME' | translate}}</label>
+    <input required name="lastname" ng-model="vm.editUser.name">
+    <div ng-messages="profileForm.lastname.$error">
+      <div ng-message="required">{{'PROFILE.NAME_REQUIRED' | translate}}</div>
+    </div>
+  </md-input-container>
+  <md-input-container class="md-block">
+    <label>{{'PROFILE.EMAIL' | translate}}</label>
+    <input type="email" name="email" ng-model="vm.editUser.email" ng-pattern="/^.+@.+\..+$/" />
+    <div ng-messages="profileForm.email.$error">
+      <div ng-message="pattern">{{'GLOBAL_ERROR.INVALID_EMAIL_FORMAT' | translate}}</div>
+    </div>
+  </md-input-container>
+  <md-input-container class="md-block">
+    <label>{{'PROFILE.NEW_PASSWORD' | translate}}</label>
+    <input type="password" ng-required="vm.isNewUser" name="newpw" ng-model="vm.editUser.newPassword">
+    <div ng-messages="profileForm.newpw.$error">
+      <div ng-message="required">{{'PROFILE.NEWPW_REQUIRED' | translate}}</div>
+    </div>
+  </md-input-container>
+  <md-input-container class="md-block">
+    <label>{{'PROFILE.NEW_PW_REPEAT' | translate}}</label>
+    <input type="password" ng-required="vm.isNewUser" name="newpw2" ng-model="vm.editUser.newPassword2" ng-match="vm.editUser.newPassword">
+    <div ng-messages="profileForm.newpw2.$error">
+      <div ng-message="required">{{'PROFILE.NEWPW2_REQUIRED' | translate}}</div>
+      <div ng-message="match">{{'PROFILE.NEWPW_DONT_MATCH' | translate}}</div>
+    </div>
+  </md-input-container>
+  <md-input-container style="margin: 0;">
+    <label>{{'PROFILE.LANGUAGE' | translate}}</label>
+    <md-select required name="language" ng-model="vm.editUser.language">
+      <md-option value="en_US">{{'LANGUAGES.en_US' | translate}}</md-option>
+      <md-option value="en_GB">{{'LANGUAGES.en_GB' | translate}}</md-option>
+      <md-option value="de_DE">{{'LANGUAGES.de_DE' | translate}}</md-option>
+    </md-select>
+    <div ng-messages="profileForm.language.$error">
+      <div ng-message="required">{{'PROFILE.LANGUAGE_REQUIRED' | translate}}</div>
+    </div>
+  </md-input-container>
+
+  <div class="clearfix" style="width: 100%; margin-top: 3em;">
+    <md-button class="floatleft" ng-click="vm.saveUser()" ng-disabled="profileForm.$invalid">
+      {{'GLOBAL.SAVE' | translate}}
+    </md-button>
+    <md-button class="floatleft" ng-click="vm.reset()">
+      {{'GLOBAL.RESET' | translate}}
+    </md-button>
+    <md-button class="floatright" ng-click="$state.go('users.list')">
+      {{'GLOBAL.BACK' | translate}}
+    </md-button>
+  </div>
+</form>

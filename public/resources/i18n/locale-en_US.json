@@ -23,7 +23,8 @@
         "OK": "Ok",
         "RESET": "Reset",
         "SHARE": "Share",
-        "EXPORT": "Export"
+        "EXPORT": "Export",
+        "BACK": "Back"
     },
     "CONTENT": {
         "MY_TASK_LISTS": "My task lists",
@@ -62,10 +63,12 @@
     },
     "PROFILE": {
         "USERNAME": "Username",
+        "USERNAME_REQUIRED": "Username is required",
         "FIRSTNAME": "First name",
         "NAME": "Last name",
         "EMAIL": "Email",
         "LANGUAGE": "Language",
+        "LANGUAGE_REQUIRED": "Language is required",
         "NAME_REQUIRED": "Name is required",
         "FIRSTNAME_REQUIRED": "First name is required",
         "CHANGE_PASSWORD": "Change password",
@@ -88,6 +91,9 @@
         "USERNAME": "Username",
         "FIRSTNAME": "First name",
         "NAME": "Name",
-        "ADD_USER": "Add user"
+        "ADD_USER": "Add user",
+        "SAVE_SUCCESS": "User saved",
+        "CONFIRM_REMOVE": "Are you sure you want to remove this user?",
+        "REMOVE_SUCCESS": "User removed"
     }
 }

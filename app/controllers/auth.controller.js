@@ -32,6 +32,7 @@
      */
     var service = {
       checkAuth: checkAuth,
+      isAdminUser: isAdminUser,
       login: login,
       logout: logout,
       loadUser: loadUser
@@ -103,6 +104,29 @@
 
         res.status(401).send();
       }
+    }
+
+
+    /**
+     * Check if the current user is authenticated as ADMIN user. Will be used as middleware
+     * for secured routes.
+     * 
+     * @memberOf AuthController#
+     * @param {Object} req - The HTTP request
+     * @param {Object} res - The HTTP response
+     * @param {Object} next - The next middleware
+     */
+    function isAdminUser(req, res, next) {
+      if (!req.isAuthenticated()) {
+        res.status(403).send();
+      }
+      
+      if (req.user && req.user.username === 'admin') {
+        next();
+        return;
+      }
+      
+      res.status(403).send();
     }
 
     /**
