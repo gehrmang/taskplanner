@@ -29,14 +29,20 @@
   /** ******************************** */
   // List all available task list of the current user
   router.get('/', authController.checkAuth, taskListController.list);
+  // List all shared task lists
+  router.get('/shared', authController.checkAuth, taskListController.listShared);
   // Export the tasks of a specific task list
   router.get('/export', authController.checkAuth, taskListController.exportTasks);
   // Save a given task list
   router.post('/', authController.checkAuth, taskListController.save);
   // Save the tasks of a specific task list
   router.post('/tasks', authController.checkAuth, taskListController.saveTasks);
-  // Load a user by its token
+  // Add a watcher to a specific task lsit
+  router.post('/watcher', authController.checkAuth, taskListController.addWatcher);
+  // Remove a given task list
   router.delete('/', authController.checkAuth, taskListController.remove);
+  // Stop watching a specific task list
+  router.delete('/watcher', authController.checkAuth, taskListController.removeWatcher);
   
   // Make the routes available to the Node application
   module.exports = router;

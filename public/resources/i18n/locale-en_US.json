@@ -24,7 +24,9 @@
         "RESET": "Reset",
         "SHARE": "Share",
         "EXPORT": "Export",
-        "BACK": "Back"
+        "BACK": "Back",
+        "ADD": "Add",
+        "SEARCH": "Search"
     },
     "CONTENT": {
         "MY_TASK_LISTS": "My task lists",
@@ -50,7 +52,8 @@
             "SAVE_ERROR": "An error occured while trying to save the task",
             "REMOVE_SUCCESS": "Task removed",
             "REMOVE_ERROR": "An error occured while removing the task"
-        }
+        },
+        "OWNER": "Owner"
     },
     "GLOBAL_ERROR": {
         "403": "The access to the requested resource has been denied.",

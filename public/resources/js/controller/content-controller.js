@@ -13,7 +13,7 @@
    */
   angular.module("taskplanner").controller("ContentController", ContentController);
 
-  ContentController.$inject = ['$rootScope', '$scope', '$mdDialog', '$mdMedia', '$translate', 'hotkeys', 'uuid4', 'AuthService', 'TaskListService', 'GrowlService'];
+  ContentController.$inject = ['$rootScope', '$scope', '$state', '$mdDialog', '$mdMedia', '$translate', 'hotkeys', 'uuid4', 'AuthService', 'TaskListService', 'GrowlService'];
 
   /**
    * The main controller of the content view.
@@ -22,6 +22,7 @@
    * @name ContentController
    * @param {Object} $rootScope - The global root scope
    * @param {Object} $scope - The scope of this controller
+   * @param {Object} $state - The $state service
    * @param {Object} $mdDialog - The Angular Material dialog service
    * @param {Object} $mdMedia - The Angular Material media service
    * @param {Object} $translate - The $translation service
@@ -31,7 +32,7 @@
    * @param {Object} TaskListService - The task list service
    * @param {Object} GrowlService - The growl notification service
    */
-  function ContentController($rootScope, $scope, $mdDialog, $mdMedia, $translate, hotkeys, uuid4, AuthService, TaskListService, GrowlService) {
+  function ContentController($rootScope, $scope, $state, $mdDialog, $mdMedia, $translate, hotkeys, uuid4, AuthService, TaskListService, GrowlService) {
 
     /**
      * The view model of this controller
@@ -94,11 +95,13 @@
     /** ************************************ */
     vm.selectTaskList = selectTaskList;
     vm.addTaskList = addTaskList;
+    vm.addSharedTaskList = addSharedTaskList;
     vm.editTaskList = editTaskList;
     vm.renameTaskList = renameTaskList;
     vm.saveTaskList = saveTaskList;
     vm.cancelRename = cancelRename;
     vm.removeTaskList = removeTaskList;
+    vm.removeWatcher = removeWatcher;
     vm.shareTaskList = shareTaskList;
     vm.exportTaskList = exportTaskList;
     vm.addTask = addTask;
@@ -108,6 +111,7 @@
     vm.removeTask = removeTask;
     vm.checkDueDate = checkDueDate;
     vm.confirm = confirm;
+    vm.isOwner = isOwner;
 
     /** ************************************ */
     /** ************* Hotkeys ************** */
@@ -135,7 +139,13 @@
      */
     function activate() {
       return TaskListService.list().then(function(result) {
-        vm.myTaskLists = result;
+        vm.myTaskLists = result.filter(function(tl) {
+          return tl.owner === AuthService.getUser()._id;
+        });
+
+        vm.sharedTaskLists = result.filter(function(tl) {
+          return tl.owner != AuthService.getUser()._id;
+        });
       });
     }
 
@@ -154,6 +164,11 @@
         return;
       }
 
+      // Navigate to home state to show the selected task list
+      if (!$state.is('home')) {
+        $state.go('home');
+      }
+
       vm.taskList = taskList;
       if (vm.renamingTaskList) {
         vm.saveTaskList();
@@ -166,6 +181,11 @@
      * @memberOf ContentController#
      */
     function addTaskList() {
+      // Navigate to home state to show the selected task list
+      if (!$state.is('home')) {
+        $state.go('home');
+      }
+
       var newTaskList = {
         title: $translate.instant('CONTENT.TASK_LIST_DEFAULT_TITLE'),
         tasks: [],
@@ -180,6 +200,42 @@
       }
 
       vm.renameTaskList(newTaskList);
+    }
+
+    /**
+     * Open the dialog to add a shared task list.
+     * 
+     * @memberOf ContentController#
+     */
+    function addSharedTaskList() {
+      var useFullScreen = ($mdMedia('sm') || $mdMedia('xs')) && $scope.customFullscreen;
+      $mdDialog.show({
+          controller: 'AddSharedDialogController',
+          controllerAs: 'sdc',
+          templateUrl: '/partials/dialogs/add-shared-dialog.html',
+          parent: angular.element(document.body),
+          targetEvent: event,
+          clickOutsideToClose: true,
+          fullscreen: useFullScreen,
+          bindToController: true,
+          locals: {
+            taskList: vm.taskList
+          }
+        })
+        .then(function() {
+          TaskListService.save(vm.taskList).then(function() {
+              GrowlService.success($translate.instant('CONTENT.SAVE_SUCCESS'));
+            },
+            function() {
+              GrowlService.error($translate.instant('CONTENT.SAVE_ERROR'));
+            });
+        }, function() {});
+
+      $scope.$watch(function() {
+        return $mdMedia('xs') || $mdMedia('sm');
+      }, function(wantsFullScreen) {
+        $scope.customFullscreen = (wantsFullScreen === true);
+      });
     }
 
     /**
@@ -258,6 +314,7 @@
         }
 
         vm.renamingTaskList = undefined;
+        vm.taskList = undefined;
         return;
       }
 
@@ -294,9 +351,31 @@
     }
 
     /**
+     * Stop watching the given task list.
+     * 
+     * @memberOf ContentController#
+     * @param {Object} taskList - The task list to stop watching
+     */
+    function removeWatcher(taskList) {
+      TaskListService.removeWatcher(taskList).then(function() {
+        var index = vm.sharedTaskLists.map(function(tl) {
+          return tl._id;
+        }).indexOf(taskList._id);
+
+        if (index >= 0) {
+          vm.sharedTaskLists.splice(index, 1);
+          if (vm.taskList._id === taskList._id) {
+            vm.taskList = undefined;
+          }
+        }
+      });
+    }
+
+    /**
      * Open the share dialog for the current task list.
      * 
      * @memberOf ContentController#
+     * @param {Object} event - The target event
      */
     function shareTaskList(event) {
       var useFullScreen = ($mdMedia('sm') || $mdMedia('xs')) && $scope.customFullscreen;
@@ -485,6 +564,15 @@
         onConfirm(targetObject);
       }, function() {});
     }
-  }
 
+    /**
+     * Check if the current user is the owner of the currently selected task list.
+     * 
+     * @memberOf ContentController#
+     * @returns {boolean} true if the current user is the owner, false otherwise
+     */
+    function isOwner() {
+      return vm.taskList.owner === AuthService.getUser()._id;
+    }
+  }
 })();

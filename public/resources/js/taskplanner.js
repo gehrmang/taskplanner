@@ -83,6 +83,16 @@ taskplannerApp.config(['$stateProvider', '$urlRouterProvider', '$translateProvid
         user: resolveUser
       },
       auth: {}
+    }).state('home.shared', {
+      // Add shared task list
+      url: 'addshared',
+      templateUrl: 'partials/addsharedlist.html',
+      controller: 'AddSharedListController',
+      controllerAs: 'vm',
+      resolve: {
+        user: resolveUser
+      },
+      auth: {}
     }).state('login', {
       // Login
       url: '/login',

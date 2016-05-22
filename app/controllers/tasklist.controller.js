@@ -40,7 +40,9 @@
       save: save,
       saveTasks: saveTasks,
       remove: remove,
-      exportTasks: exportTasks
+      exportTasks: exportTasks,
+      addWatcher: addWatcher,
+      removeWatcher: removeWatcher
     };
 
     return service;
@@ -54,8 +56,39 @@
      */
     function list(req, res) {
       TaskList.find({
-        owner: req.user._id
-      }, function(err, result) {
+          $or: [{
+            owner: req.user._id
+          }, {
+            watcher: req.user._id
+          }]
+        },
+        function(err, result) {
+          if (err) {
+            winston.error(err);
+            res.status(500).send(err);
+            return;
+          }
+
+          res.send(result);
+        });
+    }
+
+    /**
+     * List all shared task lists.
+     * 
+     * @memberOf TaskListController#
+     * @param {Object} req - The HTTP request
+     * @param {Object} res - The HTTP response
+     */
+    function listShared(req, res) {
+      TaskList.find({
+        shareMode: {
+          $in: ['r', 'w']
+        },
+        watcher: {
+          $ne: req.user._id
+        }
+      }).populate('owner').exec(function(err, result) {
         if (err) {
           winston.error(err);
           res.status(500).send(err);
@@ -64,17 +97,6 @@
 
         res.send(result);
       });
-    }
-
-    /**
-     * List all shared task lists of the current user.
-     * 
-     * @memberOf TaskListController#
-     * @param {Object} req - The HTTP request
-     * @param {Object} res - The HTTP response
-     */
-    function listShared(req, res) {
-
     }
 
     /**
@@ -95,6 +117,7 @@
             title: tl.title,
             tasks: tl.tasks,
             shareMode: tl.shareMode,
+            watcher: tl.shareMode === 'r' || tl.shareMode === 'w' ? tl.watcher : [],
             updated_at: new Date()
           }
         }, function(err) {
@@ -208,11 +231,81 @@
                 res.status(500).send(err);
                 return;
               }
-              
+
               res.download('file.csv');
             });
           });
         }
+      });
+    }
+
+    /**
+     * Add a watcher to a specific task list.
+     * 
+     * @memberOf TaskListController#
+     * @param {Object} req - The HTTP request
+     * @param {Object} res - The HTTP response
+     */
+    function addWatcher(req, res) {
+      var taskListId = req.body.taskListId;
+
+      TaskList.findOne({
+        _id: taskListId
+      }, function(err, result) {
+        if (err) {
+          winston.error(err);
+          res.status(500).send(err);
+          return;
+        }
+
+        if (result && result.watcher.indexOf(req.user._id) < 0) {
+          result.watcher.push(req.user._id);
+          TaskList.update({
+            _id: result._id
+          }, {
+            $set: {
+              watcher: result.watcher,
+              updated_at: new Date()
+            }
+          }, function(err) {
+            if (err) {
+              winston.error(err);
+              res.status(500).send(err);
+              return;
+            }
+
+            res.sendStatus(200);
+          });
+        } else {
+          res.sendStatus(200);
+        }
+      });
+    }
+
+    /**
+     * Stop watching a specific task list.
+     * 
+     * @memberOf TaskListController#
+     * @param {Object} req - The HTTP request
+     * @param {Object} res - The HTTP response
+     */
+    function removeWatcher(req, res) {
+      var taskListId = req.query['tl'];
+
+      TaskList.update({
+        _id: taskListId
+      }, {
+        $pull: {
+          watcher: req.user._id
+        }
+      }, function(err) {
+        if (err) {
+          winston.error(err);
+          res.status(500).send(err);
+          return;
+        }
+
+        res.sendStatus(200);
       });
     }
   };

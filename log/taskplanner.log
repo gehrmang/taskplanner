@@ -214,3 +214,29 @@
 {"level":"info","message":"   Passport initialized","timestamp":"2016-05-21T10:14:17.449Z"}
 {"level":"info","message":"   Taskplanner listening at http://:::8080","timestamp":"2016-05-21T10:14:17.591Z"}
 {"level":"info","message":"   Connected to MongoDB","timestamp":"2016-05-21T10:14:17.619Z"}
+{"level":"info","message":"   Passport initialized","timestamp":"2016-05-22T08:11:18.431Z"}
+{"level":"info","message":"   Taskplanner listening at http://:::8080","timestamp":"2016-05-22T08:11:18.653Z"}
+{"level":"info","message":"   Connected to MongoDB","timestamp":"2016-05-22T08:11:18.676Z"}
+{"level":"info","message":"   Passport initialized","timestamp":"2016-05-22T08:49:14.640Z"}
+{"level":"info","message":"   Taskplanner listening at http://:::8080","timestamp":"2016-05-22T08:49:14.760Z"}
+{"level":"info","message":"   Connected to MongoDB","timestamp":"2016-05-22T08:49:14.778Z"}
+{"level":"info","message":"   Passport initialized","timestamp":"2016-05-22T08:53:54.518Z"}
+{"level":"info","message":"   Taskplanner listening at http://:::8080","timestamp":"2016-05-22T08:53:54.671Z"}
+{"level":"info","message":"   Connected to MongoDB","timestamp":"2016-05-22T08:53:54.695Z"}
+{"level":"info","message":"   Passport initialized","timestamp":"2016-05-22T09:13:47.424Z"}
+{"level":"info","message":"   Taskplanner listening at http://:::8080","timestamp":"2016-05-22T09:13:47.603Z"}
+{"level":"info","message":"   Connected to MongoDB","timestamp":"2016-05-22T09:13:47.639Z"}
+{"message":"  ","name":"MongoError","stack":"MongoError: Can't canonicalize query: BadValue $or needs an array\n    at Function.MongoError.create (/home/ubuntu/workspace/node_modules/mongoose/node_modules/mongodb/node_modules/mongodb-core/lib/error.js:31:11)\n    at Cursor._find.queryCallback (/home/ubuntu/workspace/node_modules/mongoose/node_modules/mongodb/node_modules/mongodb-core/lib/cursor.js:181:34)\n    at Callbacks.emit (/home/ubuntu/workspace/node_modules/mongoose/node_modules/mongodb/node_modules/mongodb-core/lib/topologies/server.js:116:3)\n    at messageHandler (/home/ubuntu/workspace/node_modules/mongoose/node_modules/mongodb/node_modules/mongodb-core/lib/topologies/server.js:291:23)\n    at Socket.dataHandler (/home/ubuntu/workspace/node_modules/mongoose/node_modules/mongodb/node_modules/mongodb-core/lib/connection/connection.js:285:22)\n    at emitOne (events.js:77:13)\n    at Socket.emit (events.js:169:7)\n    at readableAddChunk (_stream_readable.js:146:16)\n    at Socket.Readable.push (_stream_readable.js:110:10)\n    at TCP.onread (net.js:529:20)","$err":"Can't canonicalize query: BadValue $or needs an array","code":17287,"level":"error","timestamp":"2016-05-22T09:13:52.950Z"}
+{"level":"info","message":"   Passport initialized","timestamp":"2016-05-22T09:15:50.491Z"}
+{"level":"info","message":"   Taskplanner listening at http://:::8080","timestamp":"2016-05-22T09:15:50.643Z"}
+{"level":"info","message":"   Connected to MongoDB","timestamp":"2016-05-22T09:15:50.665Z"}
+{"level":"info","message":"   Passport initialized","timestamp":"2016-05-22T09:19:16.106Z"}
+{"level":"info","message":"   Taskplanner listening at http://:::8080","timestamp":"2016-05-22T09:19:16.269Z"}
+{"level":"info","message":"   Connected to MongoDB","timestamp":"2016-05-22T09:19:16.294Z"}
+{"level":"info","message":"   Passport initialized","timestamp":"2016-05-22T09:28:51.021Z"}
+{"level":"info","message":"   Taskplanner listening at http://:::8080","timestamp":"2016-05-22T09:28:51.180Z"}
+{"level":"info","message":"   Connected to MongoDB","timestamp":"2016-05-22T09:28:51.200Z"}
+{"level":"info","message":"   Passport initialized","timestamp":"2016-05-22T09:47:50.546Z"}
+{"level":"info","message":"   Taskplanner listening at http://:::8080","timestamp":"2016-05-22T09:47:50.723Z"}
+{"level":"info","message":"   Connected to MongoDB","timestamp":"2016-05-22T09:47:50.752Z"}
+{"message":"  ","name":"MongoError","stack":"MongoError: Can't canonicalize query: BadValue unknown top level operator: $not\n    at Function.MongoError.create (/home/ubuntu/workspace/node_modules/mongoose/node_modules/mongodb/node_modules/mongodb-core/lib/error.js:31:11)\n    at Cursor._find.queryCallback (/home/ubuntu/workspace/node_modules/mongoose/node_modules/mongodb/node_modules/mongodb-core/lib/cursor.js:181:34)\n    at Callbacks.emit (/home/ubuntu/workspace/node_modules/mongoose/node_modules/mongodb/node_modules/mongodb-core/lib/topologies/server.js:116:3)\n    at messageHandler (/home/ubuntu/workspace/node_modules/mongoose/node_modules/mongodb/node_modules/mongodb-core/lib/topologies/server.js:291:23)\n    at Socket.dataHandler (/home/ubuntu/workspace/node_modules/mongoose/node_modules/mongodb/node_modules/mongodb-core/lib/connection/connection.js:285:22)\n    at emitOne (events.js:77:13)\n    at Socket.emit (events.js:169:7)\n    at readableAddChunk (_stream_readable.js:146:16)\n    at Socket.Readable.push (_stream_readable.js:110:10)\n    at TCP.onread (net.js:529:20)","$err":"Can't canonicalize query: BadValue unknown top level operator: $not","code":17287,"level":"error","timestamp":"2016-05-22T10:25:18.562Z"}

@@ -20,59 +20,68 @@
   <div class="framed-container">
     <div class="title clearfix">
       <div class="floatleft">{{'CONTENT.SHARED_TASK_LISTS' | translate}}</div>
-      <div class="floatright clickable" ng-click="vm.addSharedTaskList()" style="font-weight: normal;">{{'CONTENT.ADD_TASK_LIST' | translate}}</div>
+      <div class="floatright clickable" ng-click="$state.go('home.shared')" style="font-weight: normal;">{{'CONTENT.ADD_TASK_LIST' | translate}}</div>
     </div>
+    <ul>
+      <li class="task-list-item" ng-repeat="list in vm.sharedTaskLists | orderBy:'title'" ng-click="vm.selectTaskList(list)">
+        <div class="clearfix">
+          <div class="task-list-title" ng-hide="list.rename">{{list.title}}</div>
+          <div class="task-list-remove" ng-click="vm.confirm($event, 'CONTENT.CONFIRM_REMOVE_TASK_LIST', list, vm.removeWatcher)"><span class="icon10 icon10-cancel"></span></div>
+        </div>
+      </li>
+    </ul>
   </div>
 </div>
 
 <div class="col75">
   <div class="framed-container">
-    <div class="title clearfix" ng-if="vm.taskList" ng-hide="editMode">
-      <div class="floatleft">{{vm.taskList.title}}</div>
-      <div class="floatright" style="font-weight: normal;">
-        <span class="clickable" ng-click="vm.addTask()">{{'CONTENT.ADD_TASK' | translate}}</span>
-        <span> | </span>
-        <span class="clickable" ng-click="vm.shareTaskList()">{{'GLOBAL.SHARE' | translate}}</span>
-        <span> | </span>
-        <span class="clickable" ng-click="vm.exportTaskList()">{{'GLOBAL.EXPORT' | translate}}</span>
+    <ui-view>
+      <div class="title clearfix" ng-if="vm.taskList" ng-hide="editMode">
+        <div class="floatleft">{{vm.taskList.title}}</div>
+        <div class="floatright" style="font-weight: normal;">
+          <span class="clickable" ng-click="vm.addTask()" ng-hide="!vm.isOwner() && vm.taskList.shareMode === 'r'">{{'CONTENT.ADD_TASK' | translate}}</span>
+          <span ng-hide="!vm.isOwner()"> | </span>
+          <span class="clickable" ng-click="vm.shareTaskList()" ng-hide="!vm.isOwner()">{{'GLOBAL.SHARE' | translate}}</span>
+          <span ng-hide="!vm.isOwner() && vm.taskList.shareMode === 'r'"> | </span>
+          <span class="clickable" ng-click="vm.exportTaskList()">{{'GLOBAL.EXPORT' | translate}}</span>
+        </div>
       </div>
-    </div>
-    <div class="title" ng-if="editMode">
-      <input type="text" ng-model="vm.taskList.title" />
-    </div>
-    <ul class="tasks" ng-if="vm.taskList" style="width: 100%; margin-top: 1em;">
-      <li ng-repeat="task in vm.taskList.tasks" ng-class="vm.checkDueDate(task)">
-        <table style="width: 100%;">
-          <tr>
-            <td class="centerColumn iconColumn" rowspan="2" style="vertical-align: top;">
-              <md-checkbox class="md-primary" ng-model="task.done" aria-label="Done" ng-change="vm.saveTask(task)" style="margin-top: 2px; margin-left: 2px;">
-              </md-checkbox>
-            </td>
-            <td colspan="3">
-              <span ng-hide="task.editMode">{{task.title}}</span>
-              <textarea class="elastic" msd-elastic="" ng-model="task.title" ng-if="task.editMode" style="width: 100%;"></textarea>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <span>{{'CONTENT.TASK.DUEDATE' | translate}}:</span>
-              <span ng-hide="task.editMode">{{task.dueDate | localdate}}</span>
-              <input type="date" ng-model="task.dueDate" ng-if="task.editMode" />
-            </td>
-            <td class="taskaction">
-              <span class="clickable" ng-hide="task.editMode" ng-click="vm.editTask(task)">{{'GLOBAL.EDIT' | translate}}</span>
-              <span class="clickable" ng-if="task.editMode" ng-click="vm.saveTask(task)">{{'GLOBAL.SAVE' | translate}}</span>
-              <span> | </span>
-              <span class="clickable" ng-hide="task.editMode" ng-click="vm.confirm($event, 'CONTENT.TASK.CONFIRM_REMOVE_TASK', task, vm.removeTask)">{{'GLOBAL.REMOVE' | translate}}</span>
-              <span class="clickable" ng-if="task.editMode" ng-click="vm.cancelEdit(task)">{{'GLOBAL.CANCEL' | translate}}</span>
-            </td>
-          </tr>
-        </table>
-      </li>
-    </ul>
-    <div ng-if="vm.editMode">
-
-    </div>
-    <div ng-hide="vm.taskList || vm.editMode">{{'CONTENT.NO_TASK_LIST_SELECTED' | translate}}</div>
+      <div class="title" ng-if="editMode">
+        <input type="text" ng-model="vm.taskList.title" />
+      </div>
+      <ul class="tasks" ng-if="vm.taskList" style="width: 100%; margin-top: 1em;">
+        <li ng-repeat="task in vm.taskList.tasks" ng-class="vm.checkDueDate(task)">
+          <table style="width: 100%;">
+            <tr>
+              <td class="centerColumn iconColumn" rowspan="2" style="vertical-align: top;">
+                <md-checkbox class="md-primary" ng-model="task.done" aria-label="Done" ng-change="vm.saveTask(task)" style="margin-top: 2px; margin-left: 2px;" ng-disabled="!vm.isOwner() && vm.taskList.shareMode === 'r'">
+                </md-checkbox>
+              </td>
+              <td colspan="3">
+                <span ng-hide="task.editMode">{{task.title}}</span>
+                <textarea class="elastic" msd-elastic="" ng-model="task.title" ng-if="task.editMode" style="width: 100%;" ng-disabled="!vm.isOwner() && vm.taskList.shareMode === 'r'"></textarea>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <span>{{'CONTENT.TASK.DUEDATE' | translate}}:</span>
+                <span ng-hide="task.editMode">{{task.dueDate | localdate}}</span>
+                <input type="date" ng-model="task.dueDate" ng-if="task.editMode" ng-disabled="!vm.isOwner() && vm.taskList.shareMode === 'r'" />
+              </td>
+              <td class="taskaction">
+                <div ng-hide="!vm.isOwner() && vm.taskList.shareMode === 'r'">
+                  <span class="clickable" ng-hide="task.editMode" ng-click="vm.editTask(task)">{{'GLOBAL.EDIT' | translate}}</span>
+                  <span class="clickable" ng-if="task.editMode" ng-click="vm.saveTask(task)">{{'GLOBAL.SAVE' | translate}}</span>
+                  <span> | </span>
+                  <span class="clickable" ng-hide="task.editMode" ng-click="vm.confirm($event, 'CONTENT.TASK.CONFIRM_REMOVE_TASK', task, vm.removeTask)">{{'GLOBAL.REMOVE' | translate}}</span>
+                  <span class="clickable" ng-if="task.editMode" ng-click="vm.cancelEdit(task)">{{'GLOBAL.CANCEL' | translate}}</span>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </li>
+      </ul>
+      <div ng-hide="vm.taskList || vm.editMode">{{'CONTENT.NO_TASK_LIST_SELECTED' | translate}}</div>
+    </ui-view>
   </div>
 </div>

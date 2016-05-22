@@ -208,28 +208,28 @@ li.task-list-item:hover .task-list-rename {
   visibility: visible;
 }
 
-.tasks li {
+.tasks li, .shared-task-lists li {
   border-bottom: 1px dotted #E0E0E0;
   padding-right: 5px;
 }
 
-.tasks li:hover {
+.tasks li:hover, .shared-task-lists li:hover {
   background-color: #E0E0E0;
 }
 
-.tasks li table tr {
+.tasks li table tr, .shared-task-lists li table tr {
   border: 0 none;
 }
 
-.tasks li table tr td {
+.tasks li table tr td, .shared-task-lists li table tr td {
   padding: 0;
 }
 
-.tasks li table tr:nth-child(2) {
+.tasks li table tr:nth-child(2), .shared-task-lists li table tr:nth-child(2) {
   font-size: 10px;
 }
 
-.tasks .taskaction {
+.taskaction {
   width: 80px;
   text-align: right;
   text-transform: lowercase;

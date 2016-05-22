@@ -1,0 +1,18 @@
+<input type="search" placeholder="{{'GLOBAL.SEARCH' | translate}}" ng-model="searchQuery" />
+<ul class="shared-task-lists" style="width: 100%; margin-top: 1em;">
+  <li ng-repeat="taskList in vm.sharedTaskLists | taskListSearch:searchQuery" class="clickable" ng-click="vm.addSharedTaskList(taskList)">
+    <table style="width: 100%;">
+      <tr>
+        <td>
+          <span>{{taskList.title}}</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <span>{{'CONTENT.OWNER' | translate}}:</span>
+          <span>{{taskList.owner.firstname}} {{taskList.owner.name}}</span>
+        </td>
+      </tr>
+    </table>
+  </li>
+</ul>

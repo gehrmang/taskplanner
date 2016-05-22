@@ -42,8 +42,15 @@
       dueDate: Date,
       done: Boolean
     }],
-    owner: Schema.Types.ObjectId,
+    owner: {
+      type: Schema.Types.ObjectId,
+      ref: 'User'
+    },
     shareMode: String,
+    watcher: [{
+      type: Schema.Types.ObjectId,
+      ref: 'User'
+    }],
     created_at: Date,
     updated_at: Date
   });

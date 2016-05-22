@@ -47,10 +47,13 @@
      */
     var service = {
       list: list,
+      listShared: listShared,
       save: save,
       saveTasks: saveTasks,
       remove: remove,
-      exportTasks: exportTasks
+      exportTasks: exportTasks,
+      addWatcher: addWatcher,
+      removeWatcher: removeWatcher
     };
 
     return service;
@@ -65,6 +68,24 @@
       var deferred = $q.defer();
 
       $http.get(REST_BASE_PATH).then(function(response) {
+        deferred.resolve(response.data);
+      }, function(response) {
+        deferred.reject(response);
+      });
+
+      return deferred.promise;
+    }
+
+    /**
+     * List all shared task lists.
+     * 
+     * @memberOf TaskListService#
+     * @returns A promise resolving to the HTTP response data
+     */
+    function listShared() {
+      var deferred = $q.defer();
+
+      $http.get(REST_BASE_PATH + '/shared').then(function(response) {
         deferred.resolve(response.data);
       }, function(response) {
         deferred.reject(response);
@@ -145,11 +166,57 @@
     /**
      * Export all tasks of the given task list.
      * 
-     * @memberOF TaskListService#
+     * @memberOf TaskListService#
      * @param {Object} taskList - The taskList to be exported
      */
     function exportTasks(taskList) {
-        $window.open(REST_BASE_PATH + '/export?tl=' + taskList._id + '&t=' + AuthService.getToken(true));
+      $window.open(REST_BASE_PATH + '/export?tl=' + taskList._id + '&t=' + AuthService.getToken(true));
+    }
+
+    /**
+     * Add the current user as a watcher to the given task list.
+     * 
+     * @memberOf TaskListService#
+     * @param {Object} taskList - The task list to add a watcher to
+     * @returns A promise resolving to the HTTP response data
+     */
+    function addWatcher(taskList) {
+      var deferred = $q.defer();
+
+      $http.post(REST_BASE_PATH + '/watcher', {
+        taskListId: taskList._id
+      }).then(function(response) {
+        deferred.resolve(response.data);
+      }, function(response) {
+        deferred.reject(response);
+      });
+
+      return deferred.promise;
+    }
+
+    /**
+     * Stop watching the given task list.
+     * 
+     * @memberOf TaskListService#
+     * @param {Object} taskList - The task list to stop watching
+     * @returns A promise resolving to the HTTP response data
+     */
+    function removeWatcher(taskList) {
+      var deferred = $q.defer();
+
+      $http({
+        url: REST_BASE_PATH + '/watcher',
+        method: 'DELETE',
+        params: {
+          tl: taskList._id
+        }
+      }).then(function(response) {
+        deferred.resolve(response.data);
+      }, function(response) {
+        deferred.reject(response);
+      });
+
+      return deferred.promise;
     }
   }
 
