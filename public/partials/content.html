@@ -23,7 +23,7 @@
       <div class="floatright clickable" ng-click="$state.go('home.shared')" style="font-weight: normal;">{{'CONTENT.ADD_TASK_LIST' | translate}}</div>
     </div>
     <ul>
-      <li class="task-list-item" ng-repeat="list in vm.sharedTaskLists | orderBy:'title'" ng-click="vm.selectTaskList(list)">
+      <li class="task-list-item" ng-repeat="list in sharedTaskLists | orderBy:'title'" ng-click="vm.selectTaskList(list)">
         <div class="clearfix">
           <div class="task-list-title" ng-hide="list.rename">{{list.title}}</div>
           <div class="task-list-remove" ng-click="vm.confirm($event, 'CONTENT.CONFIRM_REMOVE_TASK_LIST', list, vm.removeWatcher)"><span class="icon10 icon10-cancel"></span></div>

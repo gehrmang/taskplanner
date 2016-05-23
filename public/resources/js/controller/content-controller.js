@@ -67,12 +67,12 @@
     vm.myTaskLists = [];
 
     /**
-     * All selected shared task lists.
+     * All selected shared task lists. Use $scope instead of vm to make it visible for child scopes.
      * 
      * @fieldOf ContentController
      * @type Object[]
      */
-    vm.sharedTaskLists = [];
+    $scope.sharedTaskLists = [];
 
     /**
      * The currently shown messages.
@@ -143,7 +143,7 @@
           return tl.owner === AuthService.getUser()._id;
         });
 
-        vm.sharedTaskLists = result.filter(function(tl) {
+        $scope.sharedTaskLists = result.filter(function(tl) {
           return tl.owner != AuthService.getUser()._id;
         });
       });
@@ -358,12 +358,12 @@
      */
     function removeWatcher(taskList) {
       TaskListService.removeWatcher(taskList).then(function() {
-        var index = vm.sharedTaskLists.map(function(tl) {
+        var index = $scope.sharedTaskLists.map(function(tl) {
           return tl._id;
         }).indexOf(taskList._id);
 
         if (index >= 0) {
-          vm.sharedTaskLists.splice(index, 1);
+          $scope.sharedTaskLists.splice(index, 1);
           if (vm.taskList._id === taskList._id) {
             vm.taskList = undefined;
           }

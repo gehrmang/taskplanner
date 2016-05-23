@@ -39,7 +39,7 @@
      * @type Object[]
      */
     vm.sharedTaskLists = [];
-    
+
     /** ************************************ */
     /** ******* Function definitions ******* */
     /** ************************************ */
@@ -73,6 +73,14 @@
      */
     function addSharedTaskList(taskList) {
       TaskListService.addWatcher(taskList);
+      $scope.sharedTaskLists.push(taskList);
+
+      var index = vm.sharedTaskLists.map(function(tl) {
+        return tl._id;
+      }).indexOf(taskList._id);
+      if (index >= 0) {
+        vm.sharedTaskLists.splice(index, 1);
+      }
     }
 
   }
