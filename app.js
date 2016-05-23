@@ -16,13 +16,17 @@
   /** ********* Node modules ********* */
   /** ******************************** */
   var express = require('express');
+  var app = express();
+  
   var cookieParser = require('cookie-parser');
   var session = require('express-session');
   var bodyParser = require('body-parser');
   var passport = require('passport');
   var winston = require('winston');
-  var EventEmitter = require('events').EventEmitter;
+  var http = require('http').Server(app);
+  var io = require('socket.io')(http);
 
+  var EventEmitter = require('events').EventEmitter;
   var messageBus = new EventEmitter();
 
   /** Winston logging initialization */
@@ -51,15 +55,12 @@
   /** ******** Route modules ********* */
   /** ******************************** */
   var authRoutes = require('./app/routes/auth.routes');
-  var taskListRoutes = require('./app/routes/tasklist.routes');
+  var taskListRoutes = require('./app/routes/tasklist.routes')(io);
   var userRoutes = require('./app/routes/user.routes');
 
   /** ******************************** */
   /** ** Application initialization ** */
   /** ******************************** */
-
-  /** The main ExpressJS application */
-  var app = express();
 
   /** Body parser initialization */
   app.use(bodyParser.urlencoded({
@@ -94,6 +95,7 @@
   app.use('/auth', authRoutes);
   app.use('/task', taskListRoutes);
   app.use('/user', userRoutes);
+  app.use(express.static(__dirname + '/node_modules'));
 
   /** ******************************** */
   /** ******* Start the server ******* */
@@ -102,11 +104,22 @@
   if (!port) {
     port = hostConfig.port;
   }
-  var server = app.listen(port, function() {
+  var server = http.listen(port, function() {
     var host = server.address().address;
     var port = server.address().port;
 
     winston.info('Taskplanner listening at http://%s:%s', host, port);
+  });
+
+  /** Initialize Socket.IO */
+  io.on('connection', function(socket) {
+    console.log('a user connected');
+
+    socket.on('disconnect', function() {
+      console.log('user disconnected');
+    });
+
+    socket.emit('init', {});
   });
 
   process.on('SIGTERM', function() {

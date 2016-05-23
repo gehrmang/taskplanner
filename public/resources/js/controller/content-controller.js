@@ -13,7 +13,7 @@
    */
   angular.module("taskplanner").controller("ContentController", ContentController);
 
-  ContentController.$inject = ['$rootScope', '$scope', '$state', '$mdDialog', '$mdMedia', '$translate', 'hotkeys', 'uuid4', 'AuthService', 'TaskListService', 'GrowlService'];
+  ContentController.$inject = ['$rootScope', '$scope', '$state', '$mdDialog', '$mdMedia', '$translate', 'hotkeys', 'uuid4', 'AuthService', 'TaskListService', 'GrowlService', 'Socket'];
 
   /**
    * The main controller of the content view.
@@ -31,8 +31,9 @@
    * @param {Object} AuthService - The authentication service
    * @param {Object} TaskListService - The task list service
    * @param {Object} GrowlService - The growl notification service
+   * @param {Object} Socket - The Socket.IO wrapper service
    */
-  function ContentController($rootScope, $scope, $state, $mdDialog, $mdMedia, $translate, hotkeys, uuid4, AuthService, TaskListService, GrowlService) {
+  function ContentController($rootScope, $scope, $state, $mdDialog, $mdMedia, $translate, hotkeys, uuid4, AuthService, TaskListService, GrowlService, Socket) {
 
     /**
      * The view model of this controller
@@ -149,6 +150,18 @@
       });
     }
 
+    /** ************************************ */
+    /** ********* Socket listener ********** */
+    /** ************************************ */
+    
+    Socket.on('init', function(data) {
+      console.log('Socket init');
+    });
+    
+    Socket.on('task update', function(data) {
+      console.log(data);
+    });
+    
     /** ************************************ */
     /** ***** Controller implementation **** */
     /** ************************************ */

@@ -1,41 +1,39 @@
 {
-    "name": "taskplanner",
-    "version": "0.0.1",
-    "description": "A simple task planner",
-    "author": "Gerry Gehrmann <gerry.gehrmann@gmx.de>",
-    "main": "app.js",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/gehrmang/taskplanner.git"
-    },
-    "bugs": {
-        "url": "https://github.com/gehrmang/taskplanner/issues"
-    },
-
-    "dependencies": {
-        "body-parser": "1.15.0",
-        "cookie-parser": "1.4.1",
-        "express": "4.13.4",
-        "express-session": "1.13.0",
-        "serve-favicon": "2.3.0",
-        "mongoose": "4.4.10",
-        "formidable": "1.0.17",
-        "async": "2.0.0-rc.2",
-        "config": "1.19.0",
-        "winston": "2.2.0",
-        "passport": "0.3.2",
-        "passport-local": "1.0.0",
-        "passport-local-mongoose": "4.0.0",
-        "passport-http": "0.3.0",
-        "jsonwebtoken": "5.7.0",
-        "atob": "2.0.0",
-        "json2csv": "3.4.1"
-    },
-
-    "devDependencies": {
-        "request": "2.69.0",
-        "request-json": "0.5.5"
-    },
-
-    "license": "GPL-3.0"
+  "name": "taskplanner",
+  "version": "0.0.1",
+  "description": "A simple task planner",
+  "author": "Gerry Gehrmann <gerry.gehrmann@gmx.de>",
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gehrmang/taskplanner.git"
+  },
+  "bugs": {
+    "url": "https://github.com/gehrmang/taskplanner/issues"
+  },
+  "dependencies": {
+    "async": "2.0.0-rc.2",
+    "atob": "2.0.0",
+    "body-parser": "1.15.0",
+    "config": "1.19.0",
+    "cookie-parser": "1.4.1",
+    "express": "4.13.4",
+    "express-session": "1.13.0",
+    "formidable": "1.0.17",
+    "json2csv": "3.4.1",
+    "jsonwebtoken": "5.7.0",
+    "mongoose": "4.4.10",
+    "passport": "0.3.2",
+    "passport-http": "0.3.0",
+    "passport-local": "1.0.0",
+    "passport-local-mongoose": "4.0.0",
+    "serve-favicon": "2.3.0",
+    "socket.io": "1.4.6",
+    "winston": "2.2.0"
+  },
+  "devDependencies": {
+    "request": "2.69.0",
+    "request-json": "0.5.5"
+  },
+  "license": "GPL-3.0"
 }

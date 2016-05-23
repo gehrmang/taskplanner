@@ -24,8 +24,9 @@
    * @module
    * @class
    * @name TaskListController
+   * @param {Object} socket - The Socket.IO service
    */
-  module.exports = function() {
+  module.exports = function(socket) {
 
     /**
      * The service interface
@@ -167,6 +168,11 @@
           res.status(500).send(err);
           return;
         }
+
+        socket.emit('task update', {
+          taskListId: taskListId,
+          tasks: tasks
+        });
 
         res.sendStatus(200);
       });
