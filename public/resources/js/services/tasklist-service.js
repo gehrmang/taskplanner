@@ -49,8 +49,9 @@
       list: list,
       listShared: listShared,
       save: save,
-      saveTasks: saveTasks,
+      saveTask: saveTask,
       remove: remove,
+      removeTask: removeTask,
       exportTasks: exportTasks,
       addWatcher: addWatcher,
       removeWatcher: removeWatcher
@@ -116,18 +117,19 @@
     }
 
     /**
-     * Save the tasks of a specific task list.
+     * Save the given task of a specific task list.
      * 
      * @memberOf TaskListService#
-     * @param {Object} taskList - The taskList to be saved
+     * @param {Object} taskListId - The ID of the task list
+     * @param {Object} task - The task to be saved
      * @returns A promise resolving to the HTTP response data
      */
-    function saveTasks(taskList) {
+    function saveTask(taskListId, task) {
       var deferred = $q.defer();
 
-      $http.post(REST_BASE_PATH + '/tasks', {
-        taskListId: taskList._id,
-        tasks: taskList.tasks
+      $http.post(REST_BASE_PATH + '/task', {
+        taskListId: taskListId,
+        task: task
       }).then(function(response) {
         deferred.resolve(response.data);
       }, function(response) {
@@ -153,6 +155,33 @@
         method: 'DELETE',
         params: {
           tl: taskList._id
+        }
+      }).then(function(response) {
+        deferred.resolve(response.data);
+      }, function(response) {
+        deferred.reject(response);
+      });
+
+      return deferred.promise;
+    }
+    
+    /**
+     * Remove the given task from its task list.
+     * 
+     * @memberOf TaskListService#
+     * @param {string} taskListId - The ID of task list
+     * @param {string} taskId - The uuid of the task to be removed
+     * @returns A promise resolving to the HTTP response data
+     */
+    function removeTask(taskListId, taskId) {
+      var deferred = $q.defer();
+
+      $http({
+        url: REST_BASE_PATH + '/task',
+        method: 'DELETE',
+        params: {
+          tl: taskListId,
+          t: taskId
         }
       }).then(function(response) {
         deferred.resolve(response.data);

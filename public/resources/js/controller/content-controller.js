@@ -153,15 +153,95 @@
     /** ************************************ */
     /** ********* Socket listener ********** */
     /** ************************************ */
-    
-    Socket.on('init', function(data) {
-      console.log('Socket init');
+
+    Socket.on('init', function(data) {});
+
+    /**
+     * Socket listener for added tasks.
+     * 
+     * @memberOf ContentController#
+     * @private
+     */
+    Socket.on('task added', function(data) {
+      var taskList = $scope.sharedTaskLists.filter(function(tl) {
+        return tl._id === data.taskListId;
+      });
+
+      if (taskList.length === 0) {
+        taskList = vm.myTaskLists.filter(function(tl) {
+          return tl._id === data.taskListId;
+        });
+      }
+
+      if (taskList.length > 0) {
+        var taskIndex = taskList[0].tasks.map(function(t) {
+          return t.uuid;
+        }).indexOf(data.task.uuid);
+
+        if (taskIndex >= 0) {
+          taskList[0].tasks[taskIndex] = data.task;
+        } else {
+          taskList[0].tasks.push(data.task);
+        }
+      }
     });
-    
-    Socket.on('task update', function(data) {
-      console.log(data);
+
+    /**
+     * Socket listener for updated tasks.
+     * 
+     * @memberOf ContentController#
+     * @private
+     */
+    Socket.on('task updated', function(data) {
+      var taskList = $scope.sharedTaskLists.filter(function(tl) {
+        return tl._id === data.taskListId;
+      });
+
+      if (taskList.length === 0) {
+        taskList = vm.myTaskLists.filter(function(tl) {
+          return tl._id === data.taskListId;
+        });
+      }
+
+      if (taskList.length > 0) {
+        var taskIndex = taskList[0].tasks.map(function(t) {
+          return t.uuid;
+        }).indexOf(data.task.uuid);
+
+        if (taskIndex >= 0) {
+          taskList[0].tasks[taskIndex] = data.task;
+        }
+      }
     });
-    
+
+    /**
+     * Socket listener for removed tasks.
+     * 
+     * @memberOf ContentController#
+     * @private
+     */
+    Socket.on('task removed', function(data) {
+      var taskList = $scope.sharedTaskLists.filter(function(tl) {
+        return tl._id === data.taskListId;
+      });
+
+      if (taskList.length === 0) {
+        taskList = vm.myTaskLists.filter(function(tl) {
+          return tl._id === data.taskListId;
+        });
+      }
+
+      if (taskList.length > 0) {
+        var taskIndex = taskList[0].tasks.map(function(t) {
+          return t.uuid;
+        }).indexOf(data.taskId);
+
+        if (taskIndex >= 0) {
+          taskList[0].tasks.splice(taskIndex, 1);
+        }
+      }
+    });
+
     /** ************************************ */
     /** ***** Controller implementation **** */
     /** ************************************ */
@@ -504,7 +584,7 @@
       delete task.backupTitle;
       delete task.backupDueDate;
 
-      TaskListService.saveTasks(vm.taskList).then(function() {
+      TaskListService.saveTask(vm.taskList._id, task).then(function() {
           delete task.isNew;
           GrowlService.success($translate.instant('CONTENT.TASK.SAVE_SUCCESS'));
         },
@@ -526,7 +606,7 @@
 
       if (index >= 0) {
         vm.taskList.tasks.splice(index, 1);
-        TaskListService.saveTasks(vm.taskList).then(function() {
+        TaskListService.removeTask(vm.taskList._id, task.uuid).then(function() {
             GrowlService.success($translate.instant('CONTENT.TASK.REMOVE_SUCCESS'));
           },
           function() {

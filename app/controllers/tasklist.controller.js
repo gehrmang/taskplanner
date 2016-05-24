@@ -39,8 +39,9 @@
       list: list,
       listShared: listShared,
       save: save,
-      saveTasks: saveTasks,
+      saveTask: saveTask,
       remove: remove,
+      removeTask: removeTask,
       exportTasks: exportTasks,
       addWatcher: addWatcher,
       removeWatcher: removeWatcher
@@ -145,37 +146,65 @@
     }
 
     /**
-     * Save the tasks of a specific task list.
+     * Save a task of a specific task list.
      * 
      * @memberOf TaskListController#
      * @param {Object} req - The HTTP request
      * @param {Object} res - The HTTP response
      */
-    function saveTasks(req, res) {
+    function saveTask(req, res) {
       var taskListId = req.body.taskListId;
-      var tasks = req.body.tasks;
+      var task = req.body.task;
 
-      TaskList.update({
-        _id: taskListId
-      }, {
-        $set: {
-          tasks: tasks,
+      if (task.isNew) {
+        delete task.isNew;
+        TaskList.findByIdAndUpdate(taskListId, {
+          $push: {
+            tasks: task
+          },
           updated_at: new Date()
-        }
-      }, function(err) {
-        if (err) {
-          winston.error(err);
-          res.status(500).send(err);
-          return;
-        }
+        }, function(err, taskList) {
+          if (err) {
+            winston.error(err);
+            res.status(500).send(err);
+            return;
+          }
 
-        socket.emit('task update', {
-          taskListId: taskListId,
-          tasks: tasks
+          if (taskList && (taskList.shareMode === 'r' || taskList.shareMode === 'w')) {
+            socket.emit('task added', {
+              taskListId: taskListId,
+              task: task
+            });
+          }
+
+          res.sendStatus(200);
         });
+      } else {
+        TaskList.findOneAndUpdate({
+            _id: taskListId,
+            "tasks.uuid": task.uuid
+          }, {
+            $set: {
+              "tasks.$": task
+            }
+          },
+          function(err, taskList) {
+            if (err) {
+              winston.error(err);
+              res.status(500).send(err);
+              return;
+            }
 
-        res.sendStatus(200);
-      });
+            if (taskList && (taskList.shareMode === 'r' || taskList.shareMode === 'w')) {
+              socket.emit('task updated', {
+                taskListId: taskListId,
+                task: task
+              });
+            }
+
+            res.sendStatus(200);
+          });
+      }
     }
 
     /**
@@ -198,6 +227,44 @@
         }
 
         res.status(200).send();
+      });
+    }
+
+    /**
+     * Remove a given task from its task list.
+     * 
+     * @memberOf TaskListController#
+     * @param {Object} req - The HTTP request
+     * @param {Object} res - The HTTP response
+     */
+    function removeTask(req, res) {
+      var taskListId = req.query['tl'];
+      var taskId = req.query['t'];
+
+      TaskList.findOneAndUpdate({
+        _id: taskListId
+      }, {
+        $pull: {
+          tasks: {
+            uuid: taskId
+          }
+        },
+        updated_at: new Date()
+      }, function(err, taskList) {
+        if (err) {
+          winston.error(err);
+          res.status(500).send(err);
+          return;
+        }
+
+        if (taskList && (taskList.shareMode === 'r' || taskList.shareMode === 'w')) {
+          socket.emit('task removed', {
+            taskListId: taskListId,
+            taskId: taskId
+          });
+        }
+
+        res.sendStatus(200);
       });
     }
 
@@ -303,7 +370,8 @@
       }, {
         $pull: {
           watcher: req.user._id
-        }
+        },
+        updated_at: new Date()
       }, function(err) {
         if (err) {
           winston.error(err);

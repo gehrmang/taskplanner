@@ -38,11 +38,13 @@
     // Save a given task list
     router.post('/', authController.checkAuth, taskListController.save);
     // Save the tasks of a specific task list
-    router.post('/tasks', authController.checkAuth, taskListController.saveTasks);
+    router.post('/task', authController.checkAuth, taskListController.saveTask);
     // Add a watcher to a specific task lsit
     router.post('/watcher', authController.checkAuth, taskListController.addWatcher);
     // Remove a given task list
     router.delete('/', authController.checkAuth, taskListController.remove);
+    // Remove a given task from its task list
+    router.delete('/task', authController.checkAuth, taskListController.removeTask);
     // Stop watching a specific task list
     router.delete('/watcher', authController.checkAuth, taskListController.removeWatcher);
 
