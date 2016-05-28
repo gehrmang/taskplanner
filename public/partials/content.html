@@ -9,7 +9,7 @@
         <div class="clearfix">
           <div class="task-list-title" ng-hide="list.rename">{{list.title}}</div>
           <div class="task-list-title" ng-if="list.rename">
-            <input class="task-list-title-input" type="text" ng-model="list.title" ng-blur="vm.saveTaskList()" />
+            <input class="task-list-title-input" type="text" ng-model="list.title" ng-blur="vm.saveTaskList()" style="width: 150px;" />
           </div>
           <div class="task-list-remove" ng-click="vm.confirm($event, 'CONTENT.CONFIRM_REMOVE_TASK_LIST', list, vm.removeTaskList)"><span class="icon10 icon10-cancel"></span></div>
           <div class="task-list-rename" ng-click="vm.renameTaskList(list)"><span class="icon10 icon10-pen"></span></div>

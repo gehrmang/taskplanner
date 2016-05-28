@@ -129,6 +129,12 @@
             return;
           }
 
+          if (tl.shareMode === 'r' || tl.shareMode === 'w') {
+            socket.emit('tasklist updated', {
+              taskList: tl
+            });
+          }
+
           res.sendStatus(200);
         });
       } else {

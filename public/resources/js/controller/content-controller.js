@@ -157,6 +157,27 @@
     Socket.on('init', function(data) {});
 
     /**
+     * Socket listener for updated task lists.
+     * 
+     * @memberOf ContentController#
+     * @private
+     */
+    Socket.on('tasklist updated', function(data) {
+      var taskList = $scope.sharedTaskLists.filter(function(tl) {
+        return tl._id === data.taskList._id;
+      });
+
+      if (taskList.length === 0) {
+        taskList = vm.myTaskLists.filter(function(tl) {
+          return tl._id === data.taskList._id;
+        });
+      }
+
+      if (taskList.length > 0) {
+        taskList[0].title = data.taskList.title;
+      }
+    });
+    /**
      * Socket listener for added tasks.
      * 
      * @memberOf ContentController#
@@ -374,7 +395,9 @@
       vm.renamingTaskList.rename = false;
       delete vm.renamingTaskList.oriTitle;
       TaskListService.save(vm.renamingTaskList).then(function(result) {
-          vm.renamingTaskList._id = result._id;
+          if (!vm.renamingTaskList._id && result._id) {
+            vm.renamingTaskList._id = result._id;
+          }
           vm.renamingTaskList = undefined;
           GrowlService.success($translate.instant('CONTENT.SAVE_SUCCESS'));
         },
