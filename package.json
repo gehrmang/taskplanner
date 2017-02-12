@@ -4,6 +4,9 @@
   "description": "A simple task planner",
   "author": "Gerry Gehrmann <gerry.gehrmann@gmx.de>",
   "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/gehrmang/taskplanner.git"
