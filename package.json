@@ -16,12 +16,12 @@
   },
   "dependencies": {
     "async": "2.0.0-rc.2",
-    "atob": "2.0.0",
-    "body-parser": "1.15.0",
+    "atob": "^2.1.2",
+    "body-parser": "^1.18.3",
     "config": "1.19.0",
     "cookie-parser": "1.4.1",
-    "express": "4.13.4",
-    "express-session": "1.13.0",
+    "express": "^4.16.4",
+    "express-session": "^1.15.6",
     "formidable": "1.0.17",
     "json2csv": "3.4.1",
     "jsonwebtoken": "5.7.0",
@@ -30,13 +30,13 @@
     "passport-http": "0.3.0",
     "passport-local": "1.0.0",
     "passport-local-mongoose": "4.0.0",
-    "serve-favicon": "2.3.0",
+    "serve-favicon": "^2.5.0",
     "socket.io": "1.4.6",
     "winston": "2.2.0"
   },
   "devDependencies": {
-    "request": "2.69.0",
-    "request-json": "0.5.5"
+    "request": "^2.88.0",
+    "request-json": "^0.6.4"
   },
   "license": "GPL-3.0"
 }
